@@ -263,45 +263,50 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         final String bank_name = customerbankname.getText().toString().trim();
         final String bank_number = customerbankcard.getText().toString().trim();
 
+        if(password != password_confirmation){
+            Toast.makeText(RegisterActivity.this, "Password didn't match", Toast.LENGTH_SHORT);
+        }
 
+        if(!fname.equals("") || !lname.equals("") || !email.equals("") || !phone.equals("") || !password.equals("") || !password_confirmation.equals("") || !address_barangay.equals("") || !bank_name.equals("") || !bank_number.equals("")){
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //response.toString();
 
+                    Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
+                    Toast.makeText(getApplicationContext(), "Invalid input please check again", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> param = new HashMap<String, String>();
+                    param.put("type", "customer");
+                    param.put("fname", fname);
+                    param.put("lname", lname);
+                    param.put("phone", phone);
+                    param.put("email", email);
+                    param.put("password", password);
+                    param.put("password_confirmation", password_confirmation);
+                    param.put("address_barangay", address_barangay);
+                    param.put("bank_name", bank_name);
+                    param.put("bank_number", bank_number);
+                    return param;
+                }
+            };
 
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //response.toString();
-
-                Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> param=new HashMap<String,String>();
-                param.put("type", "customer");
-                param.put("fname", fname);
-                param.put("lname", lname);
-                param.put("phone", phone);
-                param.put("email", email);
-                param.put("password", password);
-                param.put("password_confirmation", password_confirmation);
-                param.put("address_barangay", address_barangay);
-                param.put("bank_name", bank_name);
-                param.put("bank_number", bank_number);
-                return param;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        queue.add(request);
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            queue.add(request);
+        }else{
+            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

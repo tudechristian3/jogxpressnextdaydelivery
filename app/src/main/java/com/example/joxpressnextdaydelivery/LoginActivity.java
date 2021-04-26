@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,17 +23,31 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class LoginActivity extends AppCompatActivity {
 
-    EditText Loginphone,Loginpassword;
+    EditText Loginphone,Loginpassword,customerfname;
     TextView signup;
     Button loginbutton;
     SharedPreferences pref;
 
     private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String KEY_PHONE = "phone";
+    private static final String KEY_DATA = "data";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +57,15 @@ public class LoginActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
 
+
+
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        String phonenumber = pref.getString(KEY_PHONE, "");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+
 
         signup = findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
@@ -66,12 +86,21 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+//        if(phonenumber != null){
+//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//            startActivity(intent);
+//        }
+
+
+
+
 
     }
 
     public void login(){
         Loginphone = findViewById(R.id.txtphone);
         Loginpassword = findViewById(R.id.txtpassword);
+
 
         final String phone = Loginphone.getText().toString();
         final String password = Loginpassword.getText().toString();
@@ -80,16 +109,26 @@ public class LoginActivity extends AppCompatActivity {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+
+                    try{
+                        JSONObject obj = new JSONObject(response);
+                        String customer_name = obj.getJSONObject("data").getString("name");
+                        //Toast.makeText(LoginActivity.this, customer_name, LENGTH_SHORT).show();
+                       SharedPreferences.Editor editor = pref.edit();
+                       editor.putString(KEY_DATA, customer_name);
+                       editor.commit();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
-                    finish();
 
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Toast.makeText(LoginActivity.this, "Invalid phone number or password", Toast.LENGTH_LONG).show();
                 }
             }){
                 @Override
@@ -97,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                     Map<String,String> param=new HashMap<String,String>();
                     param.put("phone", phone);
                     param.put("password", password);
+
                     return param;
                 }
             };
@@ -104,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
             queue.add(request);
         }else{
-            Toast.makeText(getApplicationContext(), "Phone and Password can't be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Phone and Password can't be empty", LENGTH_SHORT).show();
         }
 
 
