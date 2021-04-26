@@ -48,6 +48,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtfname"
                 android:textColor="#000000"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -78,6 +79,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtLname"
             android:textColor="#000000"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -105,7 +107,37 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtemail"
+            android:inputType="textEmailAddress"
             android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtPhoneLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:boxStrokeColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/black"
+        android:hint="Phone"
+        app:startIconDrawable="@drawable/ic_phone"
+        app:startIconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconTint="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtphone"
+            android:textColor="#000000"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -135,6 +167,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtpassword"
             android:textColor="#000000"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -164,6 +197,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txconfirmpassword"
             android:textColor="#000000"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -231,6 +265,119 @@
             android:textColor="#000000"/>
 
 
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:hint="Select Barangay Code"
+        app:startIconTint="@color/black"
+        app:startIconDrawable="@drawable/ic_location"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/selectbarangaycode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="#000000"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <View
+        android:layout_width="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtBankLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:boxStrokeColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/black"
+        android:hint="Bank Name"
+        app:startIconDrawable="@drawable/ic_card"
+        app:startIconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconTint="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtbankname"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtBankCardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:boxStrokeColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/black"
+        android:hint="Bank Card"
+        app:startIconDrawable="@drawable/ic_card"
+        app:startIconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconTint="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtbankcard"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/barangaycodeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="32dp"
+        app:boxStrokeColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/black"
+        android:hint="Phone"
+        app:startIconDrawable="@drawable/ic_phone"
+        app:startIconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconTint="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtbarangaycode"
+            android:textColor="#000000"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 
