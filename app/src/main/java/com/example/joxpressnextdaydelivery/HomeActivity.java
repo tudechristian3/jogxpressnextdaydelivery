@@ -1,6 +1,7 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -43,28 +44,32 @@ public class HomeActivity extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Create Order Clicked", Toast.LENGTH_SHORT).show();
+                Intent createOrder = new Intent(HomeActivity.this, OrderActivity.class);
+                startActivity(createOrder);
             }
         });
 
         imgEarnings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Earnings Clicked", Toast.LENGTH_SHORT).show();
+                Intent my_earnings = new Intent(HomeActivity.this, EarningsActivity.class);
+                startActivity(my_earnings);
             }
         });
 
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                Intent my_profile = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(my_profile);
             }
         });
 
         imgTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Transaction Clicked", Toast.LENGTH_SHORT).show();
+                Intent my_transaction = new Intent(HomeActivity.this, TransactionActivity.class);
+                startActivity(my_transaction);
             }
         });
 
