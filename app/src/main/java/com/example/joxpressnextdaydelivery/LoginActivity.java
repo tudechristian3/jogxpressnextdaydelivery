@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String url="https://www.jogx.ph/api/v1/user/login";
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
+    private static final String KEY_TOKEN = "token";
 
 
     @Override
@@ -113,9 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                     try{
                         JSONObject obj = new JSONObject(response);
                         String customer_name = obj.getJSONObject("data").getString("name");
-                        //Toast.makeText(LoginActivity.this, customer_name, LENGTH_SHORT).show();
+                        String token = obj.getString("authToken");
                        SharedPreferences.Editor editor = pref.edit();
                        editor.putString(KEY_DATA, customer_name);
+                       editor.putString(KEY_TOKEN, token);
                        editor.commit();
                     } catch (JSONException e) {
                         e.printStackTrace();

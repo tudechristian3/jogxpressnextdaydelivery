@@ -41,6 +41,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -83,11 +84,18 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     ArrayList<String> receiverprovinceListCode = new ArrayList<>(); //province
     ArrayList<String> receivercityListCode = new ArrayList<>();
 
+
+    List<addressprovinceList> list = new ArrayList<>();
+    List<addresscityList> addresscitylist = new ArrayList<>();
+    List<addressbarangayList> addressbarangayList = new ArrayList<>();
+
     RequestQueue requestQueue;
 
 
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
+    private static final String KEY_TOKEN = "token";
+    private static final String KEY_ITEM_NAME = "item_name";
     private static final String url="https://www.jogx.ph/api/v1/user/login";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongViewCast")
@@ -97,6 +105,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_order);
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         String customer_data = pref.getString(KEY_DATA, "");
+
 
 
         customername = findViewById(R.id.customer_name);
@@ -137,7 +146,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         txtspecificaddress = findViewById(R.id.txtSpecifiyAddress);
 
         //EditTextDeliver
-        receiverinfo = findViewById(R.id.txtSenderInformation);
+        receiverinfo = findViewById(R.id.txtReceiverInformation);
         receivernumber = findViewById(R.id.txtReceiverContact);
         receiverProvince = findViewById(R.id.receiverselectprovince);
         receiverCity = findViewById(R.id.receiverselectcity);
@@ -151,13 +160,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         smallOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v == smallOrder){
+                if(v == smallOrder) {
                     createSmallOrder.setVisibility(View.VISIBLE);
-
-                }else if(v == LargeOrder){
-                    createSmallOrder.setVisibility(View.GONE);
+                    createLargeOrder.setVisibility(View.GONE);
                 }
-
             }
         });
 
@@ -187,8 +193,17 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String sender_barangay = senderBarangay.getText().toString();
                 String address = sender_barangay + ","+ sender_city + "," + sender_province;
                 String sender_specify_address = txtspecificaddress.getText().toString();
-                //Toast.makeText(OrderActivity.this, sender_specify_address, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), item_name, Toast.LENGTH_SHORT).show();
+                String cityCode = pref.getString("city_code", "");
+
+                //Receiver info
+                String receiver_name = receiverinfo.getText().toString();
+                String receiver_number = receivernumber.getText().toString();
+                String receiver_province = receiverProvince.getText().toString();
+                String receiver_city = receiverCity.getText().toString();
+                String receiver_barangay = receiverBarangay.getText().toString();
+                String receiver_address = receiver_barangay + ","+ receiver_city + "," + receiver_province;
+                String receiver_specify_address = receiverspecificaddress.getText().toString();
+
                 createSmallOrder.putExtra("small_item_name", item_name);
                 createSmallOrder.putExtra("small_item_amount", item_amount);
                 createSmallOrder.putExtra("small_sender_info", sender_info);
@@ -198,6 +213,14 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 createSmallOrder.putExtra("small_sender_barangay", sender_barangay);
                 createSmallOrder.putExtra("small_pickup_address", address);
                 createSmallOrder.putExtra("small_specify_address", sender_specify_address);
+                createSmallOrder.putExtra("small_city_code", cityCode);
+
+
+                //Receiver Data
+                createSmallOrder.putExtra("receipient_name", receiver_name);
+                createSmallOrder.putExtra("receipient_number", receiver_number);
+                createSmallOrder.putExtra("receipient_address", receiver_address);
+                createSmallOrder.putExtra("receipient_specify_address", receiver_specify_address);
                 startActivity(createSmallOrder);
             }
         });
@@ -212,7 +235,6 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-        //Set Province sender API
         //Sender
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
@@ -235,13 +257,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String province_desc = item.getString("provDesc");
                 String province_regcode = item.getString("regCode");
                 String province_citycode = item.getString("provCode");
-                provinceList.add(province_desc);
-                provinceListCode.add(province_citycode);
-                //provinceList.add(province_citycode);
-                provinceAdapter = new ArrayAdapter<>(OrderActivity.this, android.R.layout.simple_spinner_item, provinceList);
-                provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                senderProvince.setAdapter(provinceAdapter);
-
+                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                senderProvince.setAdapter(adapter);
             }
         }catch (MalformedURLException e){
             e.printStackTrace();
@@ -275,12 +294,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String province_desc = item.getString("provDesc");
                 String province_regcode = item.getString("regCode");
                 String province_citycode = item.getString("provCode");
-                receiverprovinceList.add(province_desc);
-                receiverprovinceListCode.add(province_citycode);
-                //provinceList.add(province_citycode);
-                receiverprovinceAdapter = new ArrayAdapter<>(OrderActivity.this, android.R.layout.simple_spinner_item, receiverprovinceList);
-                receiverprovinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                receiverProvince.setAdapter(receiverprovinceAdapter);
+                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                receiverProvince.setAdapter(adapter);
 
             }
         }catch (MalformedURLException e){
@@ -298,9 +315,11 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String selectedProvinceCode = provinceListCode.get(position);
+        addressprovinceList selecteditem = list.get(position);
+        String selectedProvinceCode = selecteditem.getProvCode();
 
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
@@ -324,12 +343,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String province_regcode = item.getString("regDesc");
                 String province_citycode = item.getString("provCode");
                 String citycode = item.getString("citymunCode");
-                cityList.add(province_desc);
-                cityListCode.add(citycode);
-                //provinceList.add(province_citycode);
-                cityAdapter = new ArrayAdapter<>(OrderActivity.this, android.R.layout.simple_spinner_item, cityList);
-                cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                senderCity.setAdapter(cityAdapter);
+                addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(OrderActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                senderCity.setAdapter(adapter);
 
             }
         }catch (MalformedURLException e){
@@ -339,12 +356,15 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }catch (JSONException e){
             e.printStackTrace();
         }
-
         senderCity.setOnItemClickListener(this);
-        String selectedcitycode = cityListCode.get(position);
+        addresscityList selecteditemcity = addresscitylist.get(position);
+        String selectedCityCode = selecteditemcity.getCitymunCode();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("city_code", selectedCityCode);
+        editor.commit();
 
         try{
-            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+selectedcitycode);
+            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+selectedCityCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -358,17 +378,16 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             JSONArray array = json.getJSONArray("data");
             for(int i=0; i<array.length(); i++){
                 JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("brgyCode");
-                String province_desc = item.getString("brgyDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
+                String barangay_id = item.getString("id");
+                String barangay_code = item.getString("brgyCode");
+                String barangay_desc = item.getString("brgyDesc");
+                String barangay_regcode = item.getString("regCode");
+                String barangay_citycode = item.getString("provCode");
                 String citycode = item.getString("citymunCode");
-                barangayList.add(province_desc);
-                //barangayCodeList.add(province_code);
-                barangayAdapter = new ArrayAdapter<>(OrderActivity.this, android.R.layout.simple_spinner_item, barangayList);
-                barangayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                senderBarangay.setAdapter(barangayAdapter);
+                addressbarangayList.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(OrderActivity.this, android.R.layout.simple_spinner_item, addressbarangayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                senderBarangay.setAdapter(adapter);
 
             }
         }catch (MalformedURLException e){
@@ -380,10 +399,12 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
 
         //Receiver City
-        String receiverselectedProvinceCode = receiverprovinceListCode.get(position);
+//        String receiverselectedProvinceCode = receiverprovinceListCode.get(position);
+        addresscityList receiverselecteditemcity = addresscitylist.get(position);
+        String receiverselectedCityCode = receiverselecteditemcity.getCitymunCode();
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+receiverselectedProvinceCode);
+            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+selectedProvinceCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -403,12 +424,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String province_regcode = item.getString("regDesc");
                 String province_citycode = item.getString("provCode");
                 String citycode = item.getString("citymunCode");
-                receivercityList.add(province_desc);
-                receivercityListCode.add(citycode);
-                //provinceList.add(province_citycode);
-                receivercityAdapter = new ArrayAdapter<>(OrderActivity.this, android.R.layout.simple_spinner_item, receivercityList);
-                receivercityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                receiverCity.setAdapter(receivercityAdapter);
+                addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(OrderActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                receiverCity.setAdapter(adapter);
 
             }
         }catch (MalformedURLException e){
@@ -421,10 +440,12 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
         //Receiver
         receiverCity.setOnItemClickListener(this);
-        String receiverselectedcitycode = receivercityListCode.get(position);
+//        String receiverselectedcitycode = receivercityListCode.get(position);
+        addresscityList receivercity = addresscitylist.get(position);
+        String receiverCityCode = receivercity.getCitymunCode();
 
         try{
-            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+selectedcitycode);
+            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+receiverCityCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

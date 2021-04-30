@@ -51,4 +51,9 @@ public class addressprovinceList {
     public void setProvCode(String provCode) {
         this.provCode = provCode;
     }
+
+    @Override
+    public String toString() {
+        return provDesc;
+    }
 }

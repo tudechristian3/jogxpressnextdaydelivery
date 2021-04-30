@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     LinearLayout order,imgProfile,imgEarnings,imgTransaction,imgLogout;
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
+    private static final String KEY_TOKEN = "token";
     private static final String url="https://www.jogx.ph/api/v1/user/login";
     @SuppressLint("WrongViewCast")
     @Override
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         String customer_data = pref.getString(KEY_DATA, "");
+        String customer_token = pref.getString(KEY_TOKEN, "");
 
         customername = findViewById(R.id.customer_name);
         customername.setText(customer_data);
