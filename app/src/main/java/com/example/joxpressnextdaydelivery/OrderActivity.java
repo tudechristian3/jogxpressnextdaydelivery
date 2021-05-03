@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     LinearLayout smallOrder,LargeOrder,createSmallOrder,createLargeOrder;
     EditText smallWeight,smallLength,smallWidth,smallHeight;
     EditText itemname,itemamount,senderinfo,sendernumber,txtspecificaddress,receiverinfo,receivernumber,receiverspecificaddress;
-    RadioButton cod;
+    RadioButton dimension;
     Button smallDeliver,largeDeliver;
     //Small
     AutoCompleteTextView senderProvince,senderCity,senderBarangay;
@@ -108,7 +109,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     EditText largeSenderInfo,largeSenderNumber,largeSenderSpecifyAddress;
     //EditText Large Receiver
     EditText largeReceiverInfo,largeReceiverNumber,largeReceiverSpecifyAddress;
+    RadioGroup small_cod,large_cod;
 
+    RadioButton small_payment_cod,large_payment_cod;
+    Boolean checked = false;
     RequestQueue requestQueue;
 
 
@@ -138,6 +142,9 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
         requestQueue = Volley.newRequestQueue(this);
 
+        small_payment_cod = findViewById(R.id.cod_payment);
+        large_payment_cod = findViewById(R.id.Largecod);
+
         smallOrder = findViewById(R.id.createOrder3kg);
         createSmallOrder = findViewById(R.id.CreateOrdersmall);
 
@@ -154,7 +161,9 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
         itemname = findViewById(R.id.txtItemName);
         itemamount = findViewById(R.id.txtValue);
-        cod = findViewById(R.id.small_dimension);
+        dimension = findViewById(R.id.small_dimension);
+
+        small_cod = findViewById(R.id.codGroup);
 
         //EditTextPickup
         senderinfo = findViewById(R.id.txtSenderInformation);
@@ -206,9 +215,6 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         largeReceiverNumber = findViewById(R.id.LargetxtReceiverContact);
         largeReceiverSpecifyAddress = findViewById(R.id.LargetxtreceiverSpecifiyAddress);
 
-
-
-
         smallOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,6 +253,8 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String sender_specify_address = txtspecificaddress.getText().toString();
                 String cityCode = pref.getString("city_code", "");
 
+
+
                 //Receiver info
                 String receiver_name = receiverinfo.getText().toString();
                 String receiver_number = receivernumber.getText().toString();
@@ -255,6 +263,20 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String receiver_barangay = receiverBarangay.getText().toString();
                 String receiver_address = receiver_barangay + ","+ receiver_city + "," + receiver_province;
                 String receiver_specify_address = receiverspecificaddress.getText().toString();
+                if(small_payment_cod.isChecked()){
+                    String payment = "true";
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("checked", payment);
+                    editor.commit();
+                }else{
+                    String payment = "false";
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("checked", payment);
+                    editor.commit();
+                }
+
+                String cod_true = pref.getString("checked", "");
+                createSmallOrder.putExtra("cod_checked",cod_true);
 
                 createSmallOrder.putExtra("small_item_name", item_name);
                 createSmallOrder.putExtra("small_item_amount", item_amount);
@@ -273,6 +295,9 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 createSmallOrder.putExtra("receipient_number", receiver_number);
                 createSmallOrder.putExtra("receipient_address", receiver_address);
                 createSmallOrder.putExtra("receipient_specify_address", receiver_specify_address);
+
+
+
                 startActivity(createSmallOrder);
             }
         });
@@ -283,7 +308,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 Intent createLargeOrder = new Intent(OrderActivity.this, ReviewLargeDeliveryActivity.class);
-                String cityCode = pref.getString("city_code", "");
+                String cityCodeLarge = pref.getString("large_city_code", "");
                 String selectProvince = largeSelectProvince.getText().toString();
                 String selectCity = largeSelectCity.getText().toString();
                 String selectBarangay = largeSelectBarangay.getText().toString();
@@ -309,6 +334,20 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String receiverinfo = largeReceiverInfo.getText().toString();
                 String receivernumber = largeReceiverNumber.getText().toString();
                 String receiverSpecifyAddress = largeReceiverSpecifyAddress.getText().toString();
+                if(large_payment_cod.isChecked()){
+                    String payment_large = "true";
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("checked_large", payment_large);
+                    editor.commit();
+                }else{
+                    String payment_large = "false";
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("checked_large", payment_large);
+                    editor.commit();
+                }
+
+                String cod_true = pref.getString("checked_large", "");
+                createLargeOrder.putExtra("cod_checked_large",cod_true);
 
                 //Package Detail
                 createLargeOrder.putExtra("large_weight", largeweight);
@@ -328,7 +367,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 createLargeOrder.putExtra("large_receiver_number", receivernumber);
                 createLargeOrder.putExtra("large_receiver_specify_address", receiverSpecifyAddress);
                 createLargeOrder.putExtra("largereceiveraddress", receiver_large_address);
-                createLargeOrder.putExtra("largecitycode", cityCode);
+                createLargeOrder.putExtra("largecitycode", cityCodeLarge);
                 startActivity(createLargeOrder);
             }
         });
@@ -811,4 +850,5 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             e.printStackTrace();
         }
     }
+
 }

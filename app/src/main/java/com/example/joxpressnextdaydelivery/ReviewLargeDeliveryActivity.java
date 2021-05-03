@@ -50,6 +50,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
     TextView r_receivername,r_receviernumber,r_receiveraddress,r_receiverspecifyaddress;
     //TextView
     TextView large_fee,large_total_fee;
+    TextView receiver_fee_large;
     Button btnDeliver;
     private int fee_total = 0;
     private static final String KEY_PHONE = "phone";
@@ -93,6 +94,15 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
         String receiver_specify_address = getIntent().getExtras().getString("large_receiver_specify_address");
         //CityCode
         String CityCode = getIntent().getExtras().getString("largecitycode");
+        //COD checked
+        String cod_payment = getIntent().getExtras().getString("cod_checked_large");
+
+        if(cod_payment.equals("true")){
+            receiver_fee_large = findViewById(R.id.reviewlargreceiverfee);
+            receiver_fee_large.setText(item_amount);
+        }
+
+
 
         p_weight = findViewById(R.id.reviewlargweight);
         p_length = findViewById(R.id.reviewlarglength);
@@ -142,10 +152,17 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try{
                     JSONObject obj = new JSONObject(response);
-                    String fee_amount = String.valueOf(Integer.parseInt(obj.getString("rate")));
-                    fee_total = Integer.parseInt(fee_amount);
-                    large_fee.setText(fee_amount);
-                    large_total_fee.setText(fee_amount);
+                    int fee_amount = obj.getInt("rate");
+                    if(cod_payment.equals("true")){
+                        int amount_item = Integer.parseInt(item_amount);
+                        int sum = fee_amount + amount_item;
+                        large_fee.setText(String.valueOf(fee_amount));
+                        large_total_fee.setText(String.valueOf(sum));
+                    }else{
+                        fee_total = Integer.parseInt(String.valueOf(fee_amount));
+                        large_fee.setText(String.valueOf(fee_amount));
+                        large_total_fee.setText(String.valueOf(fee_amount));
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

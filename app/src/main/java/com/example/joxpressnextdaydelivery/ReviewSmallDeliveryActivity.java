@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +47,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
     TextView senderaddress;
     TextView reviewsmall_fee;
     TextView reviewsmall_fee_total;
+    TextView receivers_fee;
     SharedPreferences pref;
     TextView reviewsmall_item_name,item_name,reviewsmall_item_amount,reviewsmall_sender_info,reviewsmall_sendernumber,reviewsmall_senderaddress,reviewspecific_address,receivername,receivernumber,receiveraddress,receiver_specifyaddress;
     Button review_delivery;
@@ -90,6 +90,12 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
         String receiver_number = getIntent().getExtras().getString("receipient_number");
         String receiver_address = getIntent().getExtras().getString("receipient_address");
         String receiver_specify_address = getIntent().getExtras().getString("receipient_specify_address");
+        String cod_payment = getIntent().getExtras().getString("cod_checked");
+
+        if(cod_payment.equals("true")){
+            receivers_fee = findViewById(R.id.reviewsmallreceiverfee);
+            receivers_fee.setText(smallitem_amount);
+        }
 
 
         //Receiver
@@ -153,10 +159,19 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try{
                     JSONObject obj = new JSONObject(response);
-                    String fee_amount = String.valueOf(Integer.parseInt(obj.getString("rate")));
-                    fee_total = Integer.parseInt(fee_amount);
-                    reviewsmall_fee.setText(fee_amount);
-                    reviewsmall_fee_total.setText(fee_amount);
+                    int fee_amount = obj.getInt("rate");
+                    if(cod_payment.equals("true")){
+                        int amount_item = Integer.parseInt(smallitem_amount);
+                        int sum = fee_amount + amount_item;
+                        reviewsmall_fee.setText(String.valueOf(fee_amount));
+                        reviewsmall_fee_total.setText(String.valueOf(sum));
+                    }else{
+                        fee_total = Integer.parseInt(String.valueOf(fee_amount));
+                        reviewsmall_fee.setText(String.valueOf(fee_amount));
+                        reviewsmall_fee_total.setText(String.valueOf(fee_amount));
+                    }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

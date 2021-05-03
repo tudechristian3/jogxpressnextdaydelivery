@@ -162,7 +162,8 @@
                     android:id="@+id/small_dimension"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dimension" />
+                    android:text="Dimension"
+                    android:checked="true"/>
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -321,7 +322,7 @@
                 android:layout_marginEnd="32dp">
 
                 <RadioButton
-                    android:id="@+id/cod"
+                    android:id="@+id/cod_payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Receiver's payment (Cash on Delivery)" />

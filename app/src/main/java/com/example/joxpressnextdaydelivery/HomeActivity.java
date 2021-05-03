@@ -1,6 +1,7 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,10 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
-
+    long mBackPressed;
     TextView Logout,customername;
     SharedPreferences pref;
     LinearLayout order,imgProfile,imgEarnings,imgTransaction,imgLogout;
@@ -78,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         imgLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Logout Clicked", Toast.LENGTH_SHORT).show();
+                clickDone();
             }
         });
 
@@ -99,4 +101,39 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        int count = this.getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            if (mBackPressed + 2000 > System.currentTimeMillis()) {
+                super.onBackPressed();
+            } else {
+                clickDone();
+
+            }
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public void clickDone() {
+        new AlertDialog.Builder(this, R.style.DialogStyle)
+                .setIcon(R.drawable.logo)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.exit))
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 }
