@@ -52,9 +52,15 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     EditText itemname,itemamount,senderinfo,sendernumber,txtspecificaddress,receiverinfo,receivernumber,receiverspecificaddress;
     RadioButton cod;
     Button smallDeliver,largeDeliver;
-
+    //Small
     AutoCompleteTextView senderProvince,senderCity,senderBarangay;
+    //Small Receiver
     AutoCompleteTextView receiverProvince,receiverCity,receiverBarangay;
+
+    //Large
+    AutoCompleteTextView largeSelectProvince,largeSelectCity,largeSelectBarangay;
+    //Large Rerceiver
+    AutoCompleteTextView largeSelectreceiverProvince,largereceiverSelectCity,largereceiverSelectBarangay;
 
     //Sender List
     ArrayList<String> provinceList = new ArrayList<>();
@@ -84,10 +90,24 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     ArrayList<String> receiverprovinceListCode = new ArrayList<>(); //province
     ArrayList<String> receivercityListCode = new ArrayList<>();
 
-
+    //Small
     List<addressprovinceList> list = new ArrayList<>();
     List<addresscityList> addresscitylist = new ArrayList<>();
     List<addressbarangayList> addressbarangayList = new ArrayList<>();
+
+    //Large
+    List<LargeaddressprovinceList> Largelist = new ArrayList<>();
+    List<LargeaddresscityList> Largeaddresscitylist = new ArrayList<>();
+    List<LargeaddressbarangayList> LargeaddressbarangayList = new ArrayList<>();
+
+    //EditText Large Pacakge Detail
+    EditText largeWeight,largeLength,largeWidth,largeHeight;
+    //EditText Large Item Detail
+    EditText largeItemName,largeItemAmount;
+    //EditText Large Pickup
+    EditText largeSenderInfo,largeSenderNumber,largeSenderSpecifyAddress;
+    //EditText Large Receiver
+    EditText largeReceiverInfo,largeReceiverNumber,largeReceiverSpecifyAddress;
 
     RequestQueue requestQueue;
 
@@ -153,6 +173,38 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         receiverBarangay = findViewById(R.id.receiverselectbarangay);
         receiverspecificaddress = findViewById(R.id.txtreceiverSpecifiyAddress);
 
+
+
+        //Large Sender
+        largeSelectProvince = findViewById(R.id.Largeselectprovince);
+        largeSelectCity = findViewById(R.id.Largeselectcity);
+        largeSelectBarangay = findViewById(R.id.Largeselectbarangay);
+
+        //Large Receiver
+        largeSelectreceiverProvince = findViewById(R.id.Largereceiverselectprovince);
+        largereceiverSelectCity = findViewById(R.id.Largereceiverselectcity);
+        largereceiverSelectBarangay = findViewById(R.id.Largereceiverselectbarangay);
+
+
+        //EditText Large Pacakge Detail
+        largeWeight = findViewById(R.id.txtLargeWeight);
+        largeLength = findViewById(R.id.txtLargeLength);
+        largeWidth = findViewById(R.id.txtLargeWidth);
+        largeHeight = findViewById(R.id.txLargeHeight);
+
+        //EditText Large Item Detial
+        largeItemName = findViewById(R.id.txtLargeItemName);
+        largeItemAmount = findViewById(R.id.txtLargeValue);
+
+        //EditText Large Pickup
+        largeSenderInfo = findViewById(R.id.txtLargeSenderInformation);
+        largeSenderNumber = findViewById(R.id.txtSendersLargeContact);
+        largeSenderSpecifyAddress = findViewById(R.id.LargetxtSpecifiyAddress);
+
+        //EditText Large Receiver
+        largeReceiverInfo = findViewById(R.id.LargetxtReceiverInformation);
+        largeReceiverNumber = findViewById(R.id.LargetxtReceiverContact);
+        largeReceiverSpecifyAddress = findViewById(R.id.LargetxtreceiverSpecifiyAddress);
 
 
 
@@ -231,11 +283,133 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 Intent createLargeOrder = new Intent(OrderActivity.this, ReviewLargeDeliveryActivity.class);
+                String cityCode = pref.getString("city_code", "");
+                String selectProvince = largeSelectProvince.getText().toString();
+                String selectCity = largeSelectCity.getText().toString();
+                String selectBarangay = largeSelectBarangay.getText().toString();
+                String sender_address = selectBarangay + ","+ selectCity + "," + selectProvince;
+
+                String receiverSelectProvince = largeSelectreceiverProvince.getText().toString();
+                String receiverSelectCity = largereceiverSelectCity.getText().toString();
+                String receiverSelectBarangay = largereceiverSelectBarangay.getText().toString();
+                String receiver_large_address = receiverSelectBarangay + ","+ receiverSelectCity + "," + receiverSelectProvince;
+
+                String largeweight = largeWeight.getText().toString();
+                String largelength = largeLength.getText().toString();
+                String largewidth = largeWidth.getText().toString();
+                String largeheight = largeHeight.getText().toString();
+
+                String largeitemname = largeItemName.getText().toString();
+                String largeitemamount = largeItemAmount.getText().toString();
+
+                String pickupinfo = largeSenderInfo.getText().toString();
+                String pickupnumber = largeSenderNumber.getText().toString();
+                String pickupSpecifyAddress = largeSenderSpecifyAddress.getText().toString();
+
+                String receiverinfo = largeReceiverInfo.getText().toString();
+                String receivernumber = largeReceiverNumber.getText().toString();
+                String receiverSpecifyAddress = largeReceiverSpecifyAddress.getText().toString();
+
+                //Package Detail
+                createLargeOrder.putExtra("large_weight", largeweight);
+                createLargeOrder.putExtra("large_length", largelength);
+                createLargeOrder.putExtra("large_width", largewidth);
+                createLargeOrder.putExtra("large_height", largeheight);
+                //Item Detail
+                createLargeOrder.putExtra("large_item_name", largeitemname);
+                createLargeOrder.putExtra("large_item_amount", largeitemamount);
+                //Pickup
+                createLargeOrder.putExtra("large_pickup_info", pickupinfo);
+                createLargeOrder.putExtra("large_pickup_number", pickupnumber);
+                createLargeOrder.putExtra("large_pickup_specify_address", pickupSpecifyAddress);
+                createLargeOrder.putExtra("largesenderaddress", sender_address);
+                //Receiver
+                createLargeOrder.putExtra("large_receiver_info", receiverinfo);
+                createLargeOrder.putExtra("large_receiver_number", receivernumber);
+                createLargeOrder.putExtra("large_receiver_specify_address", receiverSpecifyAddress);
+                createLargeOrder.putExtra("largereceiveraddress", receiver_large_address);
+                createLargeOrder.putExtra("largecitycode", cityCode);
                 startActivity(createLargeOrder);
             }
         });
 
-        //Sender
+        //Large Sender Province
+        try{
+//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is=conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String s=br.readLine();
+
+            is.close();
+            conn.disconnect();
+
+            Log.d("json data", s);
+            JSONObject json=new JSONObject(s);
+            JSONArray array = json.getJSONArray("data");
+            for(int i=0; i<array.length(); i++){
+                JSONObject item = array.getJSONObject(i);
+                String province_id = item.getString("id");
+                String province_code = item.getString("psgcCode");
+                String province_desc = item.getString("provDesc");
+                String province_regcode = item.getString("regCode");
+                String province_citycode = item.getString("provCode");
+                Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                largeSelectProvince.setAdapter(adapter);
+            }
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        largeSelectProvince.setOnItemClickListener(this);
+
+        //Large Receiver
+        try{
+//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is=conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String s=br.readLine();
+
+            is.close();
+            conn.disconnect();
+
+            Log.d("json data", s);
+            JSONObject json=new JSONObject(s);
+            JSONArray array = json.getJSONArray("data");
+            for(int i=0; i<array.length(); i++){
+                JSONObject item = array.getJSONObject(i);
+                String province_id = item.getString("id");
+                String province_code = item.getString("psgcCode");
+                String province_desc = item.getString("provDesc");
+                String province_regcode = item.getString("regCode");
+                String province_citycode = item.getString("provCode");
+                Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                largeSelectreceiverProvince.setAdapter(adapter);
+            }
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        largeSelectreceiverProvince.setOnItemClickListener(this);
+
+
+
+        //Small Sender
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
             URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
@@ -272,7 +446,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
         senderProvince.setOnItemClickListener(this);
 
-        //Receiver
+        //Small Receiver
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
             URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
@@ -320,7 +494,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         addressprovinceList selecteditem = list.get(position);
         String selectedProvinceCode = selecteditem.getProvCode();
-
+        //Small
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
             URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+selectedProvinceCode);
@@ -362,7 +536,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("city_code", selectedCityCode);
         editor.commit();
-
+        //Small
         try{
             URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+selectedCityCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -398,7 +572,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             e.printStackTrace();
         }
 
-        //Receiver City
+        //Small Receiver City
 //        String receiverselectedProvinceCode = receiverprovinceListCode.get(position);
         addresscityList receiverselecteditemcity = addresscitylist.get(position);
         String receiverselectedCityCode = receiverselecteditemcity.getCitymunCode();
@@ -438,7 +612,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             e.printStackTrace();
         }
 
-        //Receiver
+        //Small Receiver
         receiverCity.setOnItemClickListener(this);
 //        String receiverselectedcitycode = receivercityListCode.get(position);
         addresscityList receivercity = addresscitylist.get(position);
@@ -480,5 +654,161 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             e.printStackTrace();
         }
 
+        //Large Sender City
+        LargeaddressprovinceList selected = Largelist.get(position);
+        String LargeSelectedProvinceCode = selected.getProvCode();
+        try{
+//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+LargeSelectedProvinceCode);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is=conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String s=br.readLine();
+
+            is.close();
+            conn.disconnect();
+
+            Log.d("json data", s);
+            JSONObject json=new JSONObject(s);
+            JSONArray array = json.getJSONArray("data");
+            for(int i=0; i<array.length(); i++){
+                JSONObject item = array.getJSONObject(i);
+                String province_id = item.getString("id");
+                String province_code = item.getString("psgcCode");
+                String province_desc = item.getString("citymunDesc");
+                String province_regcode = item.getString("regDesc");
+                String province_citycode = item.getString("provCode");
+                String citycode = item.getString("citymunCode");
+                Largeaddresscitylist.add(new LargeaddresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                ArrayAdapter<LargeaddresscityList> adapter = new ArrayAdapter<LargeaddresscityList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largeaddresscitylist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                largeSelectCity.setAdapter(adapter);
+
+            }
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        largeSelectCity.setOnItemClickListener(this);
+        LargeaddresscityList Largereceivercity = Largeaddresscitylist.get(position);
+        String largeCityCode = Largereceivercity.getCitymunCode();
+        SharedPreferences.Editor editor2 = pref.edit();
+        editor2.putString("large_city_code", largeCityCode);
+        editor2.commit();
+        //Large Sender Barangay
+        try{
+            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+largeCityCode);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is=conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String s=br.readLine();
+
+            is.close();
+            conn.disconnect();
+
+            Log.d("json data", s);
+            JSONObject json=new JSONObject(s);
+            JSONArray array = json.getJSONArray("data");
+            for(int i=0; i<array.length(); i++){
+                JSONObject item = array.getJSONObject(i);
+                String barangay_id = item.getString("id");
+                String barangay_code = item.getString("brgyCode");
+                String barangay_desc = item.getString("brgyDesc");
+                String barangay_regcode = item.getString("regCode");
+                String barangay_citycode = item.getString("provCode");
+                String citycode = item.getString("citymunCode");
+                LargeaddressbarangayList.add(new LargeaddressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                ArrayAdapter<LargeaddressbarangayList> adapter = new ArrayAdapter<LargeaddressbarangayList>(OrderActivity.this, android.R.layout.simple_spinner_item, LargeaddressbarangayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                largeSelectBarangay.setAdapter(adapter);
+
+            }
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        //Large Receiver City
+        try{
+//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+LargeSelectedProvinceCode);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is=conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String s=br.readLine();
+
+            is.close();
+            conn.disconnect();
+
+            Log.d("json data", s);
+            JSONObject json=new JSONObject(s);
+            JSONArray array = json.getJSONArray("data");
+            for(int i=0; i<array.length(); i++){
+                JSONObject item = array.getJSONObject(i);
+                String province_id = item.getString("id");
+                String province_code = item.getString("psgcCode");
+                String province_desc = item.getString("citymunDesc");
+                String province_regcode = item.getString("regDesc");
+                String province_citycode = item.getString("provCode");
+                String citycode = item.getString("citymunCode");
+                Largeaddresscitylist.add(new LargeaddresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                ArrayAdapter<LargeaddresscityList> adapter = new ArrayAdapter<LargeaddresscityList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largeaddresscitylist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                largereceiverSelectCity .setAdapter(adapter);
+
+            }
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        largereceiverSelectCity.setOnItemClickListener(this);
+        LargeaddresscityList large = Largeaddresscitylist.get(position);
+        String largeCode = large.getCitymunCode();
+
+        //Large Receiver Barangay
+        try{
+            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+largeCode);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            InputStream is=conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String s=br.readLine();
+
+            is.close();
+            conn.disconnect();
+
+            Log.d("json data", s);
+            JSONObject json=new JSONObject(s);
+            JSONArray array = json.getJSONArray("data");
+            for(int i=0; i<array.length(); i++){
+                JSONObject item = array.getJSONObject(i);
+                String barangay_id = item.getString("id");
+                String barangay_code = item.getString("brgyCode");
+                String barangay_desc = item.getString("brgyDesc");
+                String barangay_regcode = item.getString("regCode");
+                String barangay_citycode = item.getString("provCode");
+                String citycode = item.getString("citymunCode");
+                LargeaddressbarangayList.add(new LargeaddressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                ArrayAdapter<LargeaddressbarangayList> adapter = new ArrayAdapter<LargeaddressbarangayList>(OrderActivity.this, android.R.layout.simple_spinner_item, LargeaddressbarangayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                largereceiverSelectBarangay.setAdapter(adapter);
+
+            }
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 }

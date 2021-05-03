@@ -832,15 +832,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtLargeValue"
-                    android:textColor="#000000"
-                    android:inputType="text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="#000000">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <RadioGroup
                 android:id="@+id/codLargeGroup"
