@@ -66,8 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
-
         signup = findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,15 +84,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-//        if(phonenumber != null){
-//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//            startActivity(intent);
-//        }
-
-
-
-
+        String customer_name = pref.getString(KEY_DATA, null);
+        if(customer_name != null){
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
 
     }
 
@@ -115,10 +109,10 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject obj = new JSONObject(response);
                         String customer_name = obj.getJSONObject("data").getString("name");
                         String token = obj.getString("authToken");
-                       SharedPreferences.Editor editor = pref.edit();
-                       editor.putString(KEY_DATA, customer_name);
-                       editor.putString(KEY_TOKEN, token);
-                       editor.commit();
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString(KEY_DATA, customer_name);
+                        editor.putString(KEY_TOKEN, token);
+                        editor.commit();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

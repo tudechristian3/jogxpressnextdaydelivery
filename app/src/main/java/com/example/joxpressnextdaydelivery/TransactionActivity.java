@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class TransactionActivity extends AppCompatActivity {
     ListView lv;
     TextView track_code,track_fee;
     SharedPreferences pref;
-    LinearLayout order,imgProfile,imgEarnings,imgTransaction,imgLogout;
+    LinearLayout transaction_empty;
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
     private static final String KEY_TOKEN = "token";
@@ -61,10 +62,12 @@ public class TransactionActivity extends AppCompatActivity {
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         String customer_token = pref.getString(KEY_TOKEN, "");
         String customer_data = pref.getString(KEY_DATA, "");
+        transaction_empty = findViewById(R.id.transaction_data);
 
         lv = findViewById(R.id.TransactionList);
         adapter = new TransactionAdapter(this, list);
         lv.setAdapter(adapter);
+        lv.setEmptyView(transaction_empty);
 
         track_code = findViewById(R.id.track_code);
       getSupportActionBar().setTitle("Transactions");
@@ -76,20 +79,22 @@ public class TransactionActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try{
-                    JSONObject json=new JSONObject(response);
-                    JSONArray array = json.getJSONArray("data");
-                    for(int i=0; i<array.length(); i++){
-                        JSONObject item = array.getJSONObject(i);
-                        String transaction_id = item.getString("id");
-                        String transaction_code = item.getString("tracking_code");
-                        String transaction_fee = item.getString("fee");
-                        list.add(new TransactionList(transaction_id,transaction_code,transaction_fee));
-                        adapter.notifyDataSetChanged();
+                    try{
+                        JSONObject json=new JSONObject(response);
+                        JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String transaction_id = item.getString("id");
+                            String transaction_code = item.getString("tracking_code");
+                            String transaction_fee = item.getString("fee");
+                            list.add(new TransactionList(transaction_id,transaction_code,transaction_fee));
+                            adapter.notifyDataSetChanged();
+                        }
+                    } catch (JSONException e){
+                        e.printStackTrace();
                     }
-                } catch (JSONException e){
-                    e.printStackTrace();
-                }
+
+
 
             }
         }, new Response.ErrorListener() {

@@ -23,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
     private static final String KEY_TOKEN = "token";
+    private static final String SHARED_PREF_NAME = "mypref";
     private static final String url="https://www.jogx.ph/api/v1/user/login";
     @SuppressLint("WrongViewCast")
     @Override
@@ -31,10 +32,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         String customer_data = pref.getString(KEY_DATA, "");
-        String customer_token = pref.getString(KEY_TOKEN, "");
-
-        customername = findViewById(R.id.customer_name);
-        customername.setText(customer_data);
+       String customer_token = pref.getString(KEY_TOKEN, "");
+//
+//        customername = findViewById(R.id.customer_name);
+//        customername.setText(customer_data);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -84,21 +85,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-//        Logout = findViewById(R.id.txtlogout);
-//        Logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                SharedPreferences.Editor editor = pref.edit();
-//                editor.putString(KEY_PHONE, null);
-//                editor.clear();
-//                editor.commit();
-//                Toast.makeText(HomeActivity.this, "Logout Successfully", Toast.LENGTH_SHORT).show();
-//                finish();
-//            }
-//        });
-
     }
 
     @Override
@@ -125,6 +111,10 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.clear();
+                        editor.apply();
+                        Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 })

@@ -1,8 +1,11 @@
 package com.example.joxpressnextdaydelivery;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,6 +67,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     ArrayAdapter<String> barangayAdapter;
     ArrayAdapter<String> barangayCodeAdapter;
 
+    List<addressprovinceList> list = new ArrayList<>();
+    List<addresscityList> addresscitylist = new ArrayList<>();
+    List<addressbarangayList> listBarangay = new ArrayList<>();
+
     //insert url
     private static final String url="https://www.jogx.ph/api/v1/user/register";
 
@@ -123,12 +130,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 String province_desc = item.getString("provDesc");
                 String province_regcode = item.getString("regCode");
                 String province_citycode = item.getString("provCode");
-                provinceList.add(province_desc);
-                provinceListId.add(province_citycode);
-                //provinceList.add(province_citycode);
-                provinceAdapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, provinceList);
-                provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                province.setAdapter(provinceAdapter);
+                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                province.setAdapter(adapter);
 
             }
         }catch (MalformedURLException e){
@@ -148,11 +153,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        String selectedId = provinceListId.get(position);
+        addressprovinceList selectedItem = list.get(position);
+        String selectedProvinceCode = selectedItem.getProvCode();
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+selectedId);
+            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+selectedProvinceCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -172,13 +177,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 String province_regcode = item.getString("regDesc");
                 String province_citycode = item.getString("provCode");
                 String citycode = item.getString("citymunCode");
-                cityList.add(province_desc);
-                cityCodeList.add(citycode);
-                //provinceList.add(province_citycode);
-                cityAdapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, cityList);
-                cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                municipality.setAdapter(cityAdapter);
-
+                addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                municipality.setAdapter(adapter);
             }
         }catch (MalformedURLException e){
             e.printStackTrace();
@@ -189,12 +191,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
 
         municipality.setOnItemClickListener(this);
-        String selectedcitycode = cityCodeList.get(position);
-
-
-
+        addresscityList selectedCity = addresscitylist.get(position);
+        String cityCode = selectedCity.getCitymunCode();
+//        String selectedcitycode = cityCodeList.get(position);
         try{
-            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+selectedcitycode);
+            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+cityCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -208,17 +209,16 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             JSONArray array = json.getJSONArray("data");
             for(int i=0; i<array.length(); i++){
                 JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("brgyCode");
-                String province_desc = item.getString("brgyDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
+                String barangay_id = item.getString("id");
+                String barangay_code = item.getString("brgyCode");
+                String barangay_desc = item.getString("brgyDesc");
+                String barangay_regcode = item.getString("regCode");
+                String barangay_citycode = item.getString("provCode");
                 String citycode = item.getString("citymunCode");
-                barangayList.add(province_code);
-                barangayCodeList.add(province_code);
-                barangayAdapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, barangayList);
-                barangayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                barangay.setAdapter(barangayAdapter);
+                listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                barangay.setAdapter(adapter);
 
             }
         }catch (MalformedURLException e){
@@ -229,16 +229,23 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             e.printStackTrace();
         }
 
-        //barangay.setOnItemClickListener(this);
+        barangay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                addressbarangayList selectedBarangay = listBarangay.get(position);
+                String barangaycode = selectedBarangay.getBrgyCode();
+                SharedPreferences.Editor editor = prf.edit();
+                editor.putString("barangaycode", barangaycode);
+                editor.commit();
 
-        //barangaycodetext.setText(barangaycode);
-
-
-
+            }
+        });
     }
+
 
     public void register(){
 
+        String barangayCode = prf.getString("barangaycode", "");
         first_name = findViewById(R.id.txtfname);
         last_name = findViewById(R.id.txtLname);
         email_address = findViewById(R.id.txtemail);
@@ -252,6 +259,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         barangaycodetext.setText("customer");
 
+
+
         final String type = barangaycodetext.getText().toString();
         final String fname = first_name.getText().toString().trim();
         final String lname = last_name.getText().toString().trim();
@@ -263,47 +272,58 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         final String bank_name = customerbankname.getText().toString().trim();
         final String bank_number = customerbankcard.getText().toString().trim();
 
-        if(password != password_confirmation){
-            Toast.makeText(RegisterActivity.this, "Password didn't match", Toast.LENGTH_SHORT);
-        }
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait....");
 
         if(!fname.equals("") || !lname.equals("") || !email.equals("") || !phone.equals("") || !password.equals("") || !password_confirmation.equals("") || !address_barangay.equals("") || !bank_name.equals("") || !bank_number.equals("")){
-            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    //response.toString();
+            if(!password.equals(password_confirmation)){
+                Toast.makeText(this, "Password didn't match", Toast.LENGTH_SHORT).show();
+            }else if (fname.equals("") || lname.equals("") || email.equals("") || phone.equals("") || password.equals("") || password_confirmation.equals("") || address_barangay.equals("") || bank_name.equals("") || bank_number.equals("")){
+                Toast.makeText(this, "Please fill up other fields", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //response.toString();
 
-                    Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
 
-                    Toast.makeText(getApplicationContext(), "Invalid input please check again", Toast.LENGTH_SHORT).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> param = new HashMap<String, String>();
-                    param.put("type", "customer");
-                    param.put("fname", fname);
-                    param.put("lname", lname);
-                    param.put("phone", phone);
-                    param.put("email", email);
-                    param.put("password", password);
-                    param.put("password_confirmation", password_confirmation);
-                    param.put("address_barangay", address_barangay);
-                    param.put("bank_name", bank_name);
-                    param.put("bank_number", bank_number);
-                    return param;
-                }
-            };
 
-            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-            queue.add(request);
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(RegisterActivity.this, "Invalid input please check again", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> param = new HashMap<String, String>();
+                        param.put("type", "customer");
+                        param.put("fname", fname);
+                        param.put("lname", lname);
+                        param.put("phone", phone);
+                        param.put("email", email);
+                        param.put("password", password);
+                        param.put("password_confirmation", password_confirmation);
+                        param.put("address_barangay", barangayCode);
+                        param.put("bank_name", bank_name);
+                        param.put("bank_number", bank_number);
+                        return param;
+                    }
+                };
+
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(request);
+            }
+
         }else{
             Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
         }

@@ -59,7 +59,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Type"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargtype"
@@ -70,7 +70,7 @@
                 android:layout_marginLeft="220dp"
                 android:text="Large"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Weight"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargweight"
@@ -96,7 +96,7 @@
                 android:layout_weight="1"
                 android:text="Weight"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,7 +111,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Length"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlarglength"
@@ -122,7 +122,7 @@
                 android:layout_weight="1"
                 android:text="Length"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +137,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Width"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargwidth"
@@ -148,7 +148,7 @@
                 android:layout_weight="1"
                 android:text="Width"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -163,7 +163,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Height"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargheight"
@@ -174,7 +174,7 @@
                 android:layout_weight="1"
                 android:text="Height"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -204,7 +204,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Total"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewsmalltotal"
@@ -220,12 +220,12 @@
                 android:id="@+id/reviewlargpeso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Total"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -240,7 +240,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Receiver's payment?"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargpayment"
@@ -251,7 +251,7 @@
                 android:layout_weight="1"
                 android:text="N/A"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -281,18 +281,18 @@
                 android:layout_marginTop="15dp"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="120dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -307,18 +307,18 @@
                 android:layout_marginTop="15dp"
                 android:text="Contact Number"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="105dp"
+                android:layout_marginLeft="100dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -333,18 +333,18 @@
                 android:layout_marginTop="15dp"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargcompleteaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="90dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -359,18 +359,18 @@
                 android:layout_marginTop="15dp"
                 android:text="Specific Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargcompletespecificaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="90dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -385,7 +385,7 @@
                 android:text="Delivery Info"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -400,7 +400,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargdeliveryname"
@@ -411,7 +411,7 @@
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -426,7 +426,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Contact Number"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargdeliverynumber"
@@ -437,7 +437,7 @@
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -452,18 +452,18 @@
                 android:layout_marginTop="15dp"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargdeliverycompleteaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="90dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -478,7 +478,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Specific Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/reviewlargdeliverycompletespecificaddress"
@@ -489,7 +489,7 @@
                 android:layout_weight="1"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -504,7 +504,7 @@
                 android:text="Fees"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -519,27 +519,27 @@
                 android:layout_marginTop="15dp"
                 android:text="Shipping Fee"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="150dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="₱"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
             <TextView
                 android:id="@+id/reviewlargfee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Total"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -554,27 +554,27 @@
                 android:layout_marginTop="15dp"
                 android:text="Receiver's Fee"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="140dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="₱"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
             <TextView
                 android:id="@+id/reviewlargreceiverfee"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:text="Total"
+                android:text="0"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -589,27 +589,27 @@
                 android:layout_marginTop="15dp"
                 android:text="Total"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="200dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="₱"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
             <TextView
                 android:id="@+id/reviewlargtotalfee"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Total"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
