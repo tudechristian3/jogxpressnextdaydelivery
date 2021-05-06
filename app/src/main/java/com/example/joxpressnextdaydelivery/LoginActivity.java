@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
 
-
-
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         String phonenumber = pref.getString(KEY_PHONE, "");
 
@@ -108,10 +106,16 @@ public class LoginActivity extends AppCompatActivity {
                     try{
                         JSONObject obj = new JSONObject(response);
                         String customer_name = obj.getJSONObject("data").getString("name");
+                        String customer_email = obj.getJSONObject("data").getString("email");
+                        String customer_phone = obj.getJSONObject("data").getString("phone");
+                        String customer_info = obj.getJSONObject("data").getString("info");
                         String token = obj.getString("authToken");
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString(KEY_DATA, customer_name);
                         editor.putString(KEY_TOKEN, token);
+                        editor.putString("customer_info", customer_info);
+                        editor.putString("customer_email", customer_email);
+                        editor.putString("customer_phone", customer_phone);
                         editor.commit();
                     } catch (JSONException e) {
                         e.printStackTrace();

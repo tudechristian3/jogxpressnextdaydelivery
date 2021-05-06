@@ -193,7 +193,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
         //token
         String customer_token = pref.getString(KEY_TOKEN, "");
         //fee
-        String fee = large_fee.getText().toString();
+        String fee = large_total_fee.getText().toString();
         //package
         String weight = p_weight.getText().toString();
         String length = p_length.getText().toString();

@@ -1,55 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fefefe">
+    android:descendantFocusability="blocksDescendants">
 
     <ListView
         android:id="@+id/TransactionList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:id="@+id/transaction_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <ImageView
-                android:id="@+id/no_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/slide_one_no_data"
-                android:text="Tracking Code"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/no_data"
-                android:layout_centerHorizontal="true"
-                android:text="No Record Found"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-
-</RelativeLayout>
+</LinearLayout>
