@@ -66,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent my_profile = new Intent(HomeActivity.this, ProfileActivity.class);
+                my_profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(my_profile);
             }
         });
@@ -106,8 +107,8 @@ public class HomeActivity extends AppCompatActivity {
         new AlertDialog.Builder(this, R.style.DialogStyle)
                 .setIcon(R.drawable.logo)
                 .setTitle(getString(R.string.app_name))
-                .setMessage(getString(R.string.exit))
-                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                .setMessage("Are you sure you want to exit the applicaiton?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

@@ -17,9 +17,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="80dp"
+            android:layout_width="300dp"
             android:layout_height="80dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo_jogxpress"
             android:layout_marginTop="20dp"/>
 
         <TextView

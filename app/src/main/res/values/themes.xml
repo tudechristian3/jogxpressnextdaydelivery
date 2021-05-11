@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.JoxpressNextDayDelivery" parent="Theme.AppCompat.Light">
+    <style name="Theme.JoxpressNextDayDelivery" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/white</item>
@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="DialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="DialogStyle" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="colorAccent">@color/black</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:background">@color/white</item>

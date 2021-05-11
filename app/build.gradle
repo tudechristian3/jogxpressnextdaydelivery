@@ -45,4 +45,7 @@ dependencies {
     //cardview
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    //constraintlayout
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+
 }

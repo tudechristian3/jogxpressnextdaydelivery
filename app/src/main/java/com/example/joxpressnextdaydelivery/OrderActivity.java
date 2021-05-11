@@ -241,6 +241,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         smallDeliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
                 Intent createSmallOrder = new Intent(OrderActivity.this, ReviewSmallDeliveryActivity.class);
                 String item_name = itemname.getText().toString();
                 String item_amount = itemamount.getText().toString();
@@ -252,6 +256,8 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String address = sender_barangay + ","+ sender_city + "," + sender_province;
                 String sender_specify_address = txtspecificaddress.getText().toString();
                 String cityCode = pref.getString("city_code", "");
+
+
 
 
 
@@ -274,31 +280,40 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     editor.putString("checked", payment);
                     editor.commit();
                 }
+                if(item_name.equals("") || item_amount.equals("") || sender_info.equals("") || sender_contact.equals("") || sender_province.equals("") || sender_city.equals("") || sender_barangay.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(receiver_name.equals("") || receiver_number.equals("") || receiver_province.equals("") || receiver_city.equals("") || receiver_barangay.equals("") || receiver_specify_address.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(sender_contact.equals(receiver_number)){
+                    Toast.makeText(OrderActivity.this, "Phone number must not equal", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String cod_true = pref.getString("checked", "");
+                    createSmallOrder.putExtra("cod_checked",cod_true);
 
-                String cod_true = pref.getString("checked", "");
-                createSmallOrder.putExtra("cod_checked",cod_true);
-
-                createSmallOrder.putExtra("small_item_name", item_name);
-                createSmallOrder.putExtra("small_item_amount", item_amount);
-                createSmallOrder.putExtra("small_sender_info", sender_info);
-                createSmallOrder.putExtra("small_sender_number", sender_contact);
-                createSmallOrder.putExtra("small_sender_province", sender_province);
-                createSmallOrder.putExtra("small_sender_city", sender_city);
-                createSmallOrder.putExtra("small_sender_barangay", sender_barangay);
-                createSmallOrder.putExtra("small_pickup_address", address);
-                createSmallOrder.putExtra("small_specify_address", sender_specify_address);
-                createSmallOrder.putExtra("small_city_code", cityCode);
+                    createSmallOrder.putExtra("small_item_name", item_name);
+                    createSmallOrder.putExtra("small_item_amount", item_amount);
+                    createSmallOrder.putExtra("small_sender_info", sender_info);
+                    createSmallOrder.putExtra("small_sender_number", sender_contact);
+                    createSmallOrder.putExtra("small_sender_province", sender_province);
+                    createSmallOrder.putExtra("small_sender_city", sender_city);
+                    createSmallOrder.putExtra("small_sender_barangay", sender_barangay);
+                    createSmallOrder.putExtra("small_pickup_address", address);
+                    createSmallOrder.putExtra("small_specify_address", sender_specify_address);
+                    createSmallOrder.putExtra("small_city_code", cityCode);
 
 
-                //Receiver Data
-                createSmallOrder.putExtra("receipient_name", receiver_name);
-                createSmallOrder.putExtra("receipient_number", receiver_number);
-                createSmallOrder.putExtra("receipient_address", receiver_address);
-                createSmallOrder.putExtra("receipient_specify_address", receiver_specify_address);
+                    //Receiver Data
+                    createSmallOrder.putExtra("receipient_name", receiver_name);
+                    createSmallOrder.putExtra("receipient_number", receiver_number);
+                    createSmallOrder.putExtra("receipient_address", receiver_address);
+                    createSmallOrder.putExtra("receipient_specify_address", receiver_specify_address);
 
+                    startActivity(createSmallOrder);
+                }
 
-
-                startActivity(createSmallOrder);
             }
         });
 
@@ -346,29 +361,57 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     editor.commit();
                 }
 
-                String cod_true = pref.getString("checked_large", "");
-                createLargeOrder.putExtra("cod_checked_large",cod_true);
+                if(largeweight.equals("3")){
+                    Toast.makeText(OrderActivity.this, "Weight must be greater than 3", Toast.LENGTH_SHORT).show();
+                }
+                else if(largeweight.equals("") || largelength.equals("") || largewidth.equals("") || largeheight.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(largeitemname.equals("") || largeitemamount.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(selectProvince.equals("") || selectCity.equals("") || selectProvince.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(receiverSelectProvince.equals("") || receiverSelectCity.equals("") || receiverSelectBarangay.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(pickupinfo.equals("") || pickupnumber.equals("") || pickupSpecifyAddress.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(receiverinfo.equals("") || receivernumber.equals("") || receiverSpecifyAddress.equals("")){
+                    Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
+                }
+                else if(pickupnumber.equals(receivernumber)){
+                    Toast.makeText(OrderActivity.this, "Phone must not be equal", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String cod_true = pref.getString("checked_large", "");
+                    createLargeOrder.putExtra("cod_checked_large",cod_true);
 
-                //Package Detail
-                createLargeOrder.putExtra("large_weight", largeweight);
-                createLargeOrder.putExtra("large_length", largelength);
-                createLargeOrder.putExtra("large_width", largewidth);
-                createLargeOrder.putExtra("large_height", largeheight);
-                //Item Detail
-                createLargeOrder.putExtra("large_item_name", largeitemname);
-                createLargeOrder.putExtra("large_item_amount", largeitemamount);
-                //Pickup
-                createLargeOrder.putExtra("large_pickup_info", pickupinfo);
-                createLargeOrder.putExtra("large_pickup_number", pickupnumber);
-                createLargeOrder.putExtra("large_pickup_specify_address", pickupSpecifyAddress);
-                createLargeOrder.putExtra("largesenderaddress", sender_address);
-                //Receiver
-                createLargeOrder.putExtra("large_receiver_info", receiverinfo);
-                createLargeOrder.putExtra("large_receiver_number", receivernumber);
-                createLargeOrder.putExtra("large_receiver_specify_address", receiverSpecifyAddress);
-                createLargeOrder.putExtra("largereceiveraddress", receiver_large_address);
-                createLargeOrder.putExtra("largecitycode", cityCodeLarge);
-                startActivity(createLargeOrder);
+                    //Package Detail
+                    createLargeOrder.putExtra("large_weight", largeweight);
+                    createLargeOrder.putExtra("large_length", largelength);
+                    createLargeOrder.putExtra("large_width", largewidth);
+                    createLargeOrder.putExtra("large_height", largeheight);
+                    //Item Detail
+                    createLargeOrder.putExtra("large_item_name", largeitemname);
+                    createLargeOrder.putExtra("large_item_amount", largeitemamount);
+                    //Pickup
+                    createLargeOrder.putExtra("large_pickup_info", pickupinfo);
+                    createLargeOrder.putExtra("large_pickup_number", pickupnumber);
+                    createLargeOrder.putExtra("large_pickup_specify_address", pickupSpecifyAddress);
+                    createLargeOrder.putExtra("largesenderaddress", sender_address);
+                    //Receiver
+                    createLargeOrder.putExtra("large_receiver_info", receiverinfo);
+                    createLargeOrder.putExtra("large_receiver_number", receivernumber);
+                    createLargeOrder.putExtra("large_receiver_specify_address", receiverSpecifyAddress);
+                    createLargeOrder.putExtra("largereceiveraddress", receiver_large_address);
+                    createLargeOrder.putExtra("largecitycode", cityCodeLarge);
+                    startActivity(createLargeOrder);
+                }
+
+
             }
         });
 

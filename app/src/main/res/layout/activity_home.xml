@@ -21,7 +21,7 @@
             android:text="Dashboard"
             android:textColor="@color/black"
             android:textSize="30dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/amiko"
             android:layout_margin="20dp"/>
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_margin="20dp"/>
 
         <GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:rowCount="4"
             android:columnCount="2"
@@ -71,8 +71,8 @@
                         android:layout_height="wrap_content"
                         android:text="Create an Order"
                         android:textColor="#fefefe"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="15sp"
                         android:layout_marginTop="20dp"/>
 
 
@@ -107,8 +107,8 @@
                         android:layout_height="wrap_content"
                         android:text="Earnings"
                         android:textColor="#fefefe"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="15sp"
                         android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
@@ -141,8 +141,8 @@
                         android:layout_height="wrap_content"
                         android:text="Transactions"
                         android:textColor="#fefefe"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="15sp"
                         android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
@@ -175,8 +175,8 @@
                         android:layout_height="wrap_content"
                         android:text="Profile"
                         android:textColor="#fefefe"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="15sp"
                         android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
@@ -209,8 +209,8 @@
                         android:layout_height="wrap_content"
                         android:text="Logout"
                         android:textColor="#fefefe"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="15sp"
                         android:layout_marginTop="20dp"/>
 
                 </LinearLayout>

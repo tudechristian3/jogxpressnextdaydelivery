@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ import static android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS;
 public class TransactionActivity extends AppCompatActivity {
 
     ListView ListData;
+    RelativeLayout no_transaction;
     TextView track_code;
     SharedPreferences pref;
     private static final String KEY_TOKEN = "token";
@@ -63,10 +65,11 @@ public class TransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction);
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         ListData = findViewById(R.id.TransactionList);
+        no_transaction = findViewById(R.id.rlnodata);
         //this.ListData = findViewById(R.id.TransactionList);
         this.adapter = new TransactionAdapter(this, list);
         ListData.setAdapter(adapter);
-
+        ListData.setEmptyView(no_transaction);
         getSupportActionBar().setTitle("Transactions");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fefefe")));

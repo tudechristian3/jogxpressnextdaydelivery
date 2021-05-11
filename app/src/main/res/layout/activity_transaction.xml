@@ -7,6 +7,34 @@
     <ListView
         android:id="@+id/TransactionList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/rlnodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/nodataimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/slide_one_no_data" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nodataimage"
+            android:layout_centerHorizontal="true"
+            android:text="No Transaction Found"
+            android:textColor="@color/black"
+            android:textSize="20dp">
+
+        </TextView>
+
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/nodataimage"
         android:layout_centerHorizontal="true"
-        android:text="No Data"
+        android:text="No Earnings Found"
         android:textColor="@color/black"
         android:textSize="20dp">
 

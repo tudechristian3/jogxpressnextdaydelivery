@@ -51,6 +51,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
     SharedPreferences pref;
     TextView reviewsmall_item_name,item_name,reviewsmall_item_amount,reviewsmall_sender_info,reviewsmall_sendernumber,reviewsmall_senderaddress,reviewspecific_address,receivername,receivernumber,receiveraddress,receiver_specifyaddress;
     Button review_delivery;
+    TextView receivers_payment;
     private int fee_total = 0;
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
@@ -95,6 +96,8 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
         if(cod_payment.equals("true")){
             receivers_fee = findViewById(R.id.reviewsmallreceiverfee);
             receivers_fee.setText(smallitem_amount);
+            receivers_payment = findViewById(R.id.reviewsmallpayment);
+            receivers_payment.setText("✓");
         }
 
 
@@ -225,7 +228,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         try {
-            Package.put("type", "small");
+            Package.put("type", "Small");
             Package.put("weight", "3");
             Package.put("length", "18");
             Package.put("width", "12");

@@ -14,9 +14,9 @@
 
 
     <ImageView
-        android:layout_width="80dp"
+        android:layout_width="300dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_jogxpress"
         android:layout_marginTop="20dp"/>
 
     <TextView
@@ -25,6 +25,7 @@
         android:layout_marginTop="30dp"
         android:text="Profile"
         android:textColor="@color/black"
+        android:fontFamily="@font/amiko"
         android:textSize="30dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,6 +39,7 @@
         android:layout_marginEnd="32dp"
         android:hint="First Name"
         app:startIconTint="@color/black"
+        android:fontFamily="@font/amiko"
         app:startIconDrawable="@drawable/ic_person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +50,7 @@
                 android:id="@+id/txtprofilefname"
                 android:textColor="#000000"
                 android:inputType="text"
+                android:fontFamily="@font/amiko"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -70,6 +73,7 @@
         app:startIconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:endIconTint="@color/black"
+        android:fontFamily="@font/amiko"
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -79,6 +83,7 @@
             android:id="@+id/txtprofileLname"
             android:textColor="#000000"
             android:inputType="text"
+            android:fontFamily="@font/amiko"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -93,6 +98,7 @@
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
+        android:fontFamily="@font/amiko"
         android:backgroundTint="@color/black"
         android:hint="Email"
         app:startIconDrawable="@drawable/ic_email"
@@ -109,6 +115,7 @@
             android:inputType="textEmailAddress"
             android:textColor="#000000"
             android:layout_width="match_parent"
+            android:fontFamily="@font/amiko"
             android:layout_height="wrap_content">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -122,6 +129,7 @@
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
+        android:fontFamily="@font/amiko"
         android:backgroundTint="@color/black"
         android:hint="Phone"
         app:startIconDrawable="@drawable/ic_phone"
@@ -138,6 +146,7 @@
             android:textColor="#000000"
             android:inputType="number"
             android:layout_width="match_parent"
+            android:fontFamily="@font/amiko"
             android:layout_height="wrap_content">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -148,6 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:fontFamily="@font/amiko"
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
@@ -166,6 +176,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtprofilepassword"
             android:textColor="#000000"
+            android:fontFamily="@font/amiko"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -178,6 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:fontFamily="@font/amiko"
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
@@ -197,6 +209,7 @@
             android:id="@+id/txprofileconfirmpassword"
             android:textColor="#000000"
             android:inputType="textPassword"
+            android:fontFamily="@font/amiko"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -214,6 +227,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Select Address"
+        android:fontFamily="@font/amiko"
         app:startIconTint="@color/black"
         app:startIconDrawable="@drawable/ic_location"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -222,6 +236,7 @@
             android:id="@+id/selectprofileaddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
             android:enabled="false"
             android:textColor="#000000" />
 
@@ -234,6 +249,7 @@
         android:layout_height="wrap_content"
         android:hint="Select City/Municipality"
         app:startIconTint="@color/black"
+        android:fontFamily="@font/amiko"
         app:startIconDrawable="@drawable/ic_location"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -242,6 +258,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
+            android:fontFamily="@font/amiko"
             android:textColor="#000000"/>
 
 
@@ -253,6 +270,7 @@
         android:layout_height="wrap_content"
         android:hint="Select Barangay"
         app:startIconTint="@color/black"
+        android:fontFamily="@font/amiko"
         app:startIconDrawable="@drawable/ic_location"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -260,6 +278,7 @@
             android:id="@+id/selectprofilebarangay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
             android:enabled="false"
             android:textColor="#000000"/>
 
@@ -273,6 +292,7 @@
         android:layout_height="wrap_content"
         android:hint="Select Barangay Code"
         app:startIconTint="@color/black"
+        android:fontFamily="@font/amiko"
         app:startIconDrawable="@drawable/ic_location"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -281,6 +301,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
+            android:fontFamily="@font/amiko"
             android:textColor="#000000"/>
 
 
@@ -303,6 +324,7 @@
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/black"
         android:hint="Bank Name"
+        android:fontFamily="@font/amiko"
         app:startIconDrawable="@drawable/ic_card"
         app:startIconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -315,6 +337,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtbankname"
             android:textColor="#000000"
+            android:fontFamily="@font/amiko"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -326,6 +349,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:fontFamily="@font/amiko"
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
@@ -343,6 +367,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtprofilebankcard"
             android:textColor="#000000"
+            android:fontFamily="@font/amiko"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -386,6 +411,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:textColor="@color/white"
+        android:fontFamily="@font/amiko"
         android:text="Register"
         android:backgroundTint="@color/black">
 

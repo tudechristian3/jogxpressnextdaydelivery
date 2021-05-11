@@ -108,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
             jsonException.printStackTrace();
         }
 
+
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
             URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
