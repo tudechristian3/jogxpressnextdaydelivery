@@ -1,6 +1,7 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,8 +50,28 @@ public class HomeActivity extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent createOrder = new Intent(HomeActivity.this, OrderActivity.class);
-                startActivity(createOrder);
+                ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
+                progressDialog.setMessage("Please wait....");
+                progressDialog.show();
+
+                Thread timer = new Thread(){
+                    @Override
+                    public void run() {
+                        try{
+                            sleep(2500);
+                            Intent createOrder = new Intent(HomeActivity.this, OrderActivity.class);
+                            startActivity(createOrder);
+                            progressDialog.dismiss();
+                            //finish();
+                            super.run();
+                        } catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                timer.start();
+
+
             }
         });
 

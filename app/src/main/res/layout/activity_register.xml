@@ -27,6 +27,7 @@
         android:layout_marginTop="30dp"
         android:text="Register"
         android:textColor="@color/black"
+        android:fontFamily="@font/amiko"
         android:textSize="30dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,6 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -52,7 +55,8 @@
                 android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ">
+                android:fontFamily="@font/amiko"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ">
 
             </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,14 +80,18 @@
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtLname"
             android:textColor="#000000"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,11 +108,13 @@
         android:hint="Email"
         app:startIconDrawable="@drawable/ic_email"
         app:startIconTint="@color/black"
+        android:fontFamily="@font/amiko"
         app:layout_constraintEnd_toEndOf="parent"
         app:endIconTint="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -112,7 +122,8 @@
             android:inputType="textEmailAddress"
             android:textColor="#000000"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -134,14 +145,21 @@
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
+        app:counterEnabled="true"
+        app:counterMaxLength="11"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtphone"
             android:textColor="#000000"
-            android:inputType="number"
+            android:inputType="phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:maxLength="11"
+            android:digits="1234567890">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -164,6 +182,8 @@
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -171,7 +191,9 @@
             android:textColor="#000000"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:helperText="Required *"
+            android:fontFamily="@font/amiko">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -194,6 +216,8 @@
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -201,7 +225,8 @@
             android:textColor="#000000"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -219,6 +244,8 @@
         android:hint="Select Address"
         app:startIconTint="@color/black"
         app:startIconDrawable="@drawable/ic_location"
+        app:helperText="Required *"
+        app:endIconMode="dropdown_menu"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
         <AutoCompleteTextView
@@ -226,7 +253,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:fontFamily="@font/amiko" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -238,6 +266,7 @@
         android:hint="Select City/Municipality"
         app:startIconTint="@color/black"
         app:startIconDrawable="@drawable/ic_location"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
         <AutoCompleteTextView
@@ -245,7 +274,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:fontFamily="@font/amiko"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -257,6 +287,7 @@
         android:hint="Select Barangay"
         app:startIconTint="@color/black"
         app:startIconDrawable="@drawable/ic_location"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
         <AutoCompleteTextView
@@ -264,7 +295,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:fontFamily="@font/amiko"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -313,13 +345,17 @@
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtbankname"
             android:textColor="#000000"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -341,13 +377,18 @@
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/amiko"
+        app:helperText="Required *"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtbankcard"
             android:textColor="#000000"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:inputType="phone"
+            android:digits="123456790-">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>

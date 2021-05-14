@@ -1,6 +1,7 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -51,6 +52,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
     //TextView
     TextView large_fee,large_total_fee;
     TextView receiver_fee_large;
+    TextView cod_receiver;
     Button btnDeliver;
     private int fee_total = 0;
     private static final String KEY_PHONE = "phone";
@@ -100,6 +102,8 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
         if(cod_payment.equals("true")){
             receiver_fee_large = findViewById(R.id.reviewlargreceiverfee);
             receiver_fee_large.setText(item_amount);
+            cod_receiver = findViewById(R.id.reviewlargpayment);
+            cod_receiver.setText("✓");
         }
 
 
@@ -281,11 +285,14 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ReviewLargeDeliveryActivity.this, TransactionActivity.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("VOLLEY",error.toString());
+                Toast.makeText(ReviewLargeDeliveryActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

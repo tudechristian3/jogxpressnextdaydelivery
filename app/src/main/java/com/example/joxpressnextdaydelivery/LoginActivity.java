@@ -1,6 +1,7 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -73,9 +74,26 @@ public class LoginActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-                //login();
+                ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Please wait....");
+                progressDialog.show();
+
+                Thread timer = new Thread(){
+                    @Override
+                    public void run() {
+                        try{
+                            sleep(2500);
+                            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                            startActivity(intent);
+                            progressDialog.dismiss();
+                            //finish();
+                            super.run();
+                        } catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                timer.start();
             }
         });
 

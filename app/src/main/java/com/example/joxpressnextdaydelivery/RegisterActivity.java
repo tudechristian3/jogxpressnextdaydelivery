@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -85,15 +86,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         barangay = findViewById(R.id.selectbarangay);
         barangaycode = findViewById(R.id.selectbarangaycode);
 
-//        fname = findViewById(R.id.txtfname);
-//        lname = findViewById(R.id.txtLname);
-//        email = findViewById(R.id.txtemail);
-//        phone = findViewById(R.id.txtphone);
-//        password = findViewById(R.id.txtpassword);
-//        confirmpassword = findViewById(R.id.txconfirmpassword);
-//        bankname = findViewById(R.id.txtbankname);
-//        bankcard = findViewById(R.id.txtbankcard);
-//        barangaycodetext = findViewById(R.id.txtbarangaycode);
 
 
 
@@ -109,42 +101,77 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         });
 
         //get Data of province
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
+        String URL = "https://www.jogx.ph/api/v1/getAllProvince";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONObject json=new JSONObject(response);
+                    JSONArray array = json.getJSONArray("data");
+                    for(int i=0; i<array.length(); i++){
+                        JSONObject item = array.getJSONObject(i);
+                        String province_id = item.getString("id");
+                        String province_code = item.getString("psgcCode");
+                        String province_desc = item.getString("provDesc");
+                        String province_regcode = item.getString("regCode");
+                        String province_citycode = item.getString("provCode");
+                        list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                        ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        province.setAdapter(adapter);
 
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("provDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
-                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                province.setAdapter(adapter);
+                    }
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
             }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+        });
 
+        Volley.newRequestQueue(RegisterActivity.this).add(stringRequest);
         province.setOnItemClickListener(this);
+
+
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String province_id = item.getString("id");
+//                String province_code = item.getString("psgcCode");
+//                String province_desc = item.getString("provDesc");
+//                String province_regcode = item.getString("regCode");
+//                String province_citycode = item.getString("provCode");
+//                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+//                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                province.setAdapter(adapter);
+//
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+
+
         //end of getData of province
 
     }
@@ -280,18 +307,53 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 Toast.makeText(this, "Password didn't match", Toast.LENGTH_SHORT).show();
             }else if (fname.equals("") || lname.equals("") || email.equals("") || phone.equals("") || password.equals("") || password_confirmation.equals("") || address_barangay.equals("") || bank_name.equals("") || bank_number.equals("")){
                 Toast.makeText(this, "Please fill up other fields", Toast.LENGTH_SHORT).show();
+            }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                email_address.setError("Please enter a valid email address");
             }
             else{
+                progressDialog.show();
                 StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         //response.toString();
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            String json_package = obj.getString("phone");
 
-                        progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                            if(json_package.equals(json_package)){
+                                Toast.makeText(RegisterActivity.this, "The phone has already been taken", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            JSONObject obj_email = new JSONObject(response);
+                            String json_email = obj_email.getString("email");
+
+                            if(json_email.equals(json_email)){
+                                Toast.makeText(RegisterActivity.this, "The email has already been taken", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            JSONObject obj_response = new JSONObject(response);
+                            String json_data = obj_response.getString("data");
+                            if(json_data.equals(json_data)){
+                                progressDialog.dismiss();
+                                Toast.makeText(RegisterActivity.this, "Created Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
 
 

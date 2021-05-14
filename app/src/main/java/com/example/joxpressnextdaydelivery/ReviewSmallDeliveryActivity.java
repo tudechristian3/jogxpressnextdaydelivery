@@ -1,6 +1,7 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -286,11 +287,14 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ReviewSmallDeliveryActivity.this, TransactionActivity.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("VOLLEY",error.toString());
+                Toast.makeText(ReviewSmallDeliveryActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

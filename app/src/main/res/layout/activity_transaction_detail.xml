@@ -40,13 +40,13 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <ImageView
+            <TextView
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:src="@drawable/peso"/>
+                android:text="₱"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/transaction_tracking_fee"
@@ -327,13 +327,13 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <ImageView
+            <TextView
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:src="@drawable/peso"/>
+                android:text="₱"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/transaction_item_amount"

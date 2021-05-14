@@ -28,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -416,155 +417,281 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         });
 
         //Large Sender Province
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
-
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("provDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
-                Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                largeSelectProvince.setAdapter(adapter);
+        String URL_sender_large = "https://www.jogx.ph/api/v1/getAllProvince";
+        StringRequest stringRequest_sender_large = new StringRequest(Request.Method.GET, URL_sender_large, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONObject json=new JSONObject(response);
+                    JSONArray array = json.getJSONArray("data");
+                    for(int i=0; i<array.length(); i++){
+                        JSONObject item = array.getJSONObject(i);
+                        String province_id = item.getString("id");
+                        String province_code = item.getString("psgcCode");
+                        String province_desc = item.getString("provDesc");
+                        String province_regcode = item.getString("regCode");
+                        String province_citycode = item.getString("provCode");
+                        Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                        ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        largeSelectProvince.setAdapter(adapter);
+                    }
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
             }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
+            }
+        });
+        Volley.newRequestQueue(OrderActivity.this).add(stringRequest_sender_large);
         largeSelectProvince.setOnItemClickListener(this);
 
+
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String province_id = item.getString("id");
+//                String province_code = item.getString("psgcCode");
+//                String province_desc = item.getString("provDesc");
+//                String province_regcode = item.getString("regCode");
+//                String province_citycode = item.getString("provCode");
+//                Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+//                ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                largeSelectProvince.setAdapter(adapter);
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+
+
+
+
+
         //Large Receiver
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
+        String URL_receiver_large = "https://www.jogx.ph/api/v1/getAllProvince";
+        StringRequest stringRequest_receiver_large = new StringRequest(Request.Method.GET, URL_receiver_large, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONObject json=new JSONObject(response);
+                    JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String province_id = item.getString("id");
+                            String province_code = item.getString("psgcCode");
+                            String province_desc = item.getString("provDesc");
+                            String province_regcode = item.getString("regCode");
+                            String province_citycode = item.getString("provCode");
+                            Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                            ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            largeSelectreceiverProvince.setAdapter(adapter);
+                        }
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            is.close();
-            conn.disconnect();
+                }
+            });
 
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("provDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
-                Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                largeSelectreceiverProvince.setAdapter(adapter);
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
+        Volley.newRequestQueue(OrderActivity.this).add(stringRequest_receiver_large);
         largeSelectreceiverProvince.setOnItemClickListener(this);
 
 
 
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String province_id = item.getString("id");
+//                String province_code = item.getString("psgcCode");
+//                String province_desc = item.getString("provDesc");
+//                String province_regcode = item.getString("regCode");
+//                String province_citycode = item.getString("provCode");
+//                Largelist.add(new LargeaddressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+//                ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                largeSelectreceiverProvince.setAdapter(adapter);
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+
+
+
+
+
         //Small Sender
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
+        String URL_sender_small = "https://www.jogx.ph/api/v1/getAllProvince";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_sender_small, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONObject json=new JSONObject(response);
+                    JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String province_id = item.getString("id");
+                            String province_code = item.getString("psgcCode");
+                            String province_desc = item.getString("provDesc");
+                            String province_regcode = item.getString("regCode");
+                            String province_citycode = item.getString("provCode");
+                            list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                            ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            senderProvince.setAdapter(adapter);
+                        }
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            is.close();
-            conn.disconnect();
+                }
+            });
 
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("provDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
-                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                senderProvince.setAdapter(adapter);
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
+        Volley.newRequestQueue(OrderActivity.this).add(stringRequest);
         senderProvince.setOnItemClickListener(this);
 
+
+
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String province_id = item.getString("id");
+//                String province_code = item.getString("psgcCode");
+//                String province_desc = item.getString("provDesc");
+//                String province_regcode = item.getString("regCode");
+//                String province_citycode = item.getString("provCode");
+//                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+//                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                senderProvince.setAdapter(adapter);
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+
+
+
         //Small Receiver
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
+        String URL_receiver_small = "https://www.jogx.ph/api/v1/getAllProvince";
+        StringRequest stringRequest_receiver_small = new StringRequest(Request.Method.GET, URL_sender_small, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONObject json=new JSONObject(response);
+                    JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String province_id = item.getString("id");
+                            String province_code = item.getString("psgcCode");
+                            String province_desc = item.getString("provDesc");
+                            String province_regcode = item.getString("regCode");
+                            String province_citycode = item.getString("provCode");
+                            list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                            ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            receiverProvince.setAdapter(adapter);
+                        }
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            is.close();
-            conn.disconnect();
+                }
+            });
 
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("provDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
-                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                receiverProvince.setAdapter(adapter);
-
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
+        Volley.newRequestQueue(OrderActivity.this).add(stringRequest_receiver_small);
         receiverProvince.setOnItemClickListener(this);
+
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+       // }
+
+
 
 
 
