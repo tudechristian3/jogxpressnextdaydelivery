@@ -60,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                         try{
                             sleep(2500);
                             Intent createOrder = new Intent(HomeActivity.this, OrderActivity.class);
+                            createOrder.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(createOrder);
                             progressDialog.dismiss();
                             //finish();
@@ -103,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
         imgLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickDone();
+                clickLogout();
             }
         });
 
@@ -136,7 +137,33 @@ public class HomeActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = pref.edit();
                         editor.clear();
                         editor.apply();
+                        finish();
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    public void clickLogout(){
+        new AlertDialog.Builder(this, R.style.DialogStyle)
+                .setIcon(R.drawable.logo)
+                .setTitle(getString(R.string.app_name))
+                .setMessage("Are you sure you want to Logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.clear();
+                        editor.apply();
                         Toast.makeText(HomeActivity.this, "Logout", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 })

@@ -30,6 +30,7 @@
             android:layout_centerHorizontal="true"
             android:text="No Transaction Found"
             android:textColor="@color/black"
+            android:fontFamily="@font/amiko"
             android:textSize="20dp">
 
         </TextView>

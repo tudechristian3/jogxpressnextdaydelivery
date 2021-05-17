@@ -262,7 +262,7 @@
                 android:id="@+id/reviewlargpayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="x"
@@ -635,6 +635,7 @@
                 android:layout_weight="1"
                 android:text="0"
                 android:textColor="@color/black"
+                android:fontFamily="@font/amiko"
                 android:textSize="15dp" />
         </LinearLayout>
 

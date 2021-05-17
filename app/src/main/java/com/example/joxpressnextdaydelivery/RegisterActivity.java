@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -40,7 +38,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -51,26 +48,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     InputStream is;
     EditText first_name,last_name ,email_address ,phone_number ,customer_password ,customerconfirmpassword ,customerbankname ,customerbankcard ,customerbarangay,barangaycodetext ;
 
-    //province
-    ArrayList<String> provinceList = new ArrayList<>(); //List
-    ArrayList<String> provinceListId = new ArrayList<>(); //List
-    ArrayAdapter<String> provinceAdapter; //Adapter
-
-    //City
-    ArrayList<String> cityList = new ArrayList<>(); //List
-    ArrayList<String> cityCodeList = new ArrayList<>(); //List
-    ArrayAdapter<String> cityAdapter; //Adapter
-
-    //Barangay
-    ArrayList<String> barangayList = new ArrayList<>(); //List
-    ArrayList<String> barangayCodeList = new ArrayList<>(); //List
-
-    ArrayAdapter<String> barangayAdapter;
-    ArrayAdapter<String> barangayCodeAdapter;
-
-    List<addressprovinceList> list = new ArrayList<>();
-    List<addresscityList> addresscitylist = new ArrayList<>();
-    List<addressbarangayList> listBarangay = new ArrayList<>();
+    ArrayList<addressprovinceList> list = new ArrayList<>();
+    ArrayList<addresscityList> addresscitylist = new ArrayList<>();
+    ArrayList<addressbarangayList> listBarangay = new ArrayList<>();
 
     //insert url
     private static final String url="https://www.jogx.ph/api/v1/user/register";
@@ -100,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
+
         //get Data of province
         String URL = "https://www.jogx.ph/api/v1/getAllProvince";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -115,10 +96,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         String province_desc = item.getString("provDesc");
                         String province_regcode = item.getString("regCode");
                         String province_citycode = item.getString("provCode");
-                        list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                        ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        province.setAdapter(adapter);
+                        if(province_desc.equals("CEBU") || province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")){
+                            list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+                            ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            province.setAdapter(adapter);
+                        }
+
 
                     }
                 } catch (JSONException e){
@@ -134,11 +118,396 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         Volley.newRequestQueue(RegisterActivity.this).add(stringRequest);
         province.setOnItemClickListener(this);
+        //end of getData of province
 
+    }
+
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        String prov_cagayan = list.get(position).getProvDesc();
+        String prov_negros = list.get(position).getProvDesc();
+        String prov_bohol = list.get(position).getProvDesc();
+        String prov_cebu = list.get(position).getProvDesc();
+
+        String city_cagayan = list.get(position).getProvCode();
+        String city_negros = list.get(position).getProvCode();
+        String city_bohol = list.get(position).getProvCode();
+        String city_cebu = list.get(position).getProvCode();
+
+//        Toast.makeText(this, prov_cagayan, Toast.LENGTH_SHORT).show();
+
+        if(prov_cagayan.equals(prov_cagayan)) {
+            //Toast.makeText(this, city_cagayan, Toast.LENGTH_SHORT).show();
+            try{
+                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream is=conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String s=br.readLine();
+
+                is.close();
+                conn.disconnect();
+
+                Log.d("json data", s);
+                    JSONObject json=new JSONObject(s);
+                    JSONArray array = json.getJSONArray("data");
+                    for(int i=0; i<array.length(); i++){
+                        JSONObject item = array.getJSONObject(i);
+                        String province_id = item.getString("id");
+                        String province_code = item.getString("psgcCode");
+                        String province_desc = item.getString("citymunDesc");
+                        String province_regcode = item.getString("regDesc");
+                        String province_citycode = item.getString("provCode");
+                        String citycode = item.getString("citymunCode");
+                        addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                        ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        municipality.setAdapter(adapter);
+                    }
+
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(prov_negros.equals(prov_negros)){
+            //Toast.makeText(this, city_negros, Toast.LENGTH_SHORT).show();
+            try{
+                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_negros);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream is=conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String s=br.readLine();
+
+                is.close();
+                conn.disconnect();
+
+                Log.d("json data", s);
+                JSONObject json=new JSONObject(s);
+                JSONArray array = json.getJSONArray("data");
+                for(int i=0; i<array.length(); i++){
+                    JSONObject item = array.getJSONObject(i);
+                    String province_id = item.getString("id");
+                    String province_code = item.getString("psgcCode");
+                    String province_desc = item.getString("citymunDesc");
+                    String province_regcode = item.getString("regDesc");
+                    String province_citycode = item.getString("provCode");
+                    String citycode = item.getString("citymunCode");
+                    addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                    ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    municipality.setAdapter(adapter);
+                }
+
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(prov_bohol.equals(prov_bohol)){
+            //Toast.makeText(this, city_negros, Toast.LENGTH_SHORT).show();
+            try{
+                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_bohol);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream is=conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String s=br.readLine();
+
+                is.close();
+                conn.disconnect();
+
+                Log.d("json data", s);
+                JSONObject json=new JSONObject(s);
+                JSONArray array = json.getJSONArray("data");
+                for(int i=0; i<array.length(); i++){
+                    JSONObject item = array.getJSONObject(i);
+                    String province_id = item.getString("id");
+                    String province_code = item.getString("psgcCode");
+                    String province_desc = item.getString("citymunDesc");
+                    String province_regcode = item.getString("regDesc");
+                    String province_citycode = item.getString("provCode");
+                    String citycode = item.getString("citymunCode");
+                    addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                    ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    municipality.setAdapter(adapter);
+                }
+
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(prov_cebu.equals(prov_cebu)){
+            //Toast.makeText(this, city_negros, Toast.LENGTH_SHORT).show();
+            try{
+                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cebu);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream is=conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String s=br.readLine();
+
+                is.close();
+                conn.disconnect();
+
+                Log.d("json data", s);
+                JSONObject json=new JSONObject(s);
+                JSONArray array = json.getJSONArray("data");
+                for(int i=0; i<array.length(); i++){
+                    JSONObject item = array.getJSONObject(i);
+                    String province_id = item.getString("id");
+                    String province_code = item.getString("psgcCode");
+                    String province_desc = item.getString("citymunDesc");
+                    String province_regcode = item.getString("regDesc");
+                    String province_citycode = item.getString("provCode");
+                    String citycode = item.getString("citymunCode");
+                    addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+                    ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    municipality.setAdapter(adapter);
+                }
+
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+
+
+
+//
+//
+//
+//            String pro_code = prf.getString("checked_large", "");
+//            Toast.makeText(this, pro_code, Toast.LENGTH_SHORT).show();
+
+//        addressprovinceList selectedItem = list.get(3);
+//        String selectedProvinceCode = selectedItem.getProvCode();
 
 //        try{
-////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-//            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+//            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+pro_code);
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//                JSONObject json=new JSONObject(s);
+//                JSONArray array = json.getJSONArray("data");
+//                for(int i=0; i<array.length(); i++){
+//                    JSONObject item = array.getJSONObject(i);
+//                    String province_id = item.getString("id");
+//                    String province_code = item.getString("psgcCode");
+//                    String province_desc = item.getString("citymunDesc");
+//                    String province_regcode = item.getString("regDesc");
+//                    String province_citycode = item.getString("provCode");
+//                    String citycode = item.getString("citymunCode");
+//                    addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+//                    ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    municipality.setAdapter(adapter);
+//                }
+//
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+        municipality.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String mun_cagayan = addresscitylist.get(position).getCitymunCode();
+                String mun_negros = addresscitylist.get(position).getCitymunCode();
+                String mun_bohol = addresscitylist.get(position).getCitymunCode();
+                String mun_cebu = addresscitylist.get(position).getCitymunCode();
+
+                String muni_code_cagayan = addresscitylist.get(position).getCitymunCode();
+                String muni_code_negros = addresscitylist.get(position).getCitymunCode();
+                String muni_code_bohol = addresscitylist.get(position).getCitymunCode();
+                String muni_code_cebu = addresscitylist.get(position).getCitymunCode();
+
+                if(mun_cagayan.equals(mun_cagayan)){
+                    //Toast.makeText(RegisterActivity.this, muni_code_cagayan, Toast.LENGTH_SHORT).show();
+                    try{
+                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        InputStream is=conn.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        String s=br.readLine();
+
+                        is.close();
+                        conn.disconnect();
+
+                        Log.d("json data", s);
+                        JSONObject json=new JSONObject(s);
+                        JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String barangay_id = item.getString("id");
+                            String barangay_code = item.getString("brgyCode");
+                            String barangay_desc = item.getString("brgyDesc");
+                            String barangay_regcode = item.getString("regCode");
+                            String barangay_citycode = item.getString("provCode");
+                            String citycode = item.getString("citymunCode");
+                            listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                            ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            barangay.setAdapter(adapter);
+
+                        }
+                    }catch (MalformedURLException e){
+                        e.printStackTrace();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                }
+                else if(mun_negros.equals(mun_negros)){
+                    Toast.makeText(RegisterActivity.this, muni_code_negros, Toast.LENGTH_SHORT).show();
+                    try{
+                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_negros);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        InputStream is=conn.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        String s=br.readLine();
+
+                        is.close();
+                        conn.disconnect();
+
+                        Log.d("json data", s);
+                        JSONObject json=new JSONObject(s);
+                        JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String barangay_id = item.getString("id");
+                            String barangay_code = item.getString("brgyCode");
+                            String barangay_desc = item.getString("brgyDesc");
+                            String barangay_regcode = item.getString("regCode");
+                            String barangay_citycode = item.getString("provCode");
+                            String citycode = item.getString("citymunCode");
+                            listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                            ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            barangay.setAdapter(adapter);
+
+                        }
+                    }catch (MalformedURLException e){
+                        e.printStackTrace();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+                else if(mun_bohol.equals(mun_bohol)){
+                    Toast.makeText(RegisterActivity.this, muni_code_bohol, Toast.LENGTH_SHORT).show();
+                    try{
+                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        InputStream is=conn.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        String s=br.readLine();
+
+                        is.close();
+                        conn.disconnect();
+
+                        Log.d("json data", s);
+                        JSONObject json=new JSONObject(s);
+                        JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String barangay_id = item.getString("id");
+                            String barangay_code = item.getString("brgyCode");
+                            String barangay_desc = item.getString("brgyDesc");
+                            String barangay_regcode = item.getString("regCode");
+                            String barangay_citycode = item.getString("provCode");
+                            String citycode = item.getString("citymunCode");
+                            listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                            ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            barangay.setAdapter(adapter);
+
+                        }
+                    }catch (MalformedURLException e){
+                        e.printStackTrace();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+                else if(mun_cebu.equals(muni_code_cebu)){
+                    Toast.makeText(RegisterActivity.this, muni_code_cebu, Toast.LENGTH_SHORT).show();
+                    try{
+                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        InputStream is=conn.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                        String s=br.readLine();
+
+                        is.close();
+                        conn.disconnect();
+
+                        Log.d("json data", s);
+                        JSONObject json=new JSONObject(s);
+                        JSONArray array = json.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            JSONObject item = array.getJSONObject(i);
+                            String barangay_id = item.getString("id");
+                            String barangay_code = item.getString("brgyCode");
+                            String barangay_desc = item.getString("brgyDesc");
+                            String barangay_regcode = item.getString("regCode");
+                            String barangay_citycode = item.getString("provCode");
+                            String citycode = item.getString("citymunCode");
+                            listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+                            ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            barangay.setAdapter(adapter);
+
+                        }
+                    }catch (MalformedURLException e){
+                        e.printStackTrace();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+//        municipality.setOnItemClickListener(this);
+//        addresscityList selectedCity = addresscitylist.get(position);
+//        String cityCode = selectedCity.getCitymunCode();
+////        String selectedcitycode = cityCodeList.get(position);
+//        try{
+//            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+cityCode);
 //            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 //            InputStream is=conn.getInputStream();
 //            BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -152,15 +521,16 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 //            JSONArray array = json.getJSONArray("data");
 //            for(int i=0; i<array.length(); i++){
 //                JSONObject item = array.getJSONObject(i);
-//                String province_id = item.getString("id");
-//                String province_code = item.getString("psgcCode");
-//                String province_desc = item.getString("provDesc");
-//                String province_regcode = item.getString("regCode");
-//                String province_citycode = item.getString("provCode");
-//                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-//                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
+//                String barangay_id = item.getString("id");
+//                String barangay_code = item.getString("brgyCode");
+//                String barangay_desc = item.getString("brgyDesc");
+//                String barangay_regcode = item.getString("regCode");
+//                String barangay_citycode = item.getString("provCode");
+//                String citycode = item.getString("citymunCode");
+//                listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+//                ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
 //                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                province.setAdapter(adapter);
+//                barangay.setAdapter(adapter);
 //
 //            }
 //        }catch (MalformedURLException e){
@@ -171,91 +541,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 //            e.printStackTrace();
 //        }
 
-
-        //end of getData of province
-
-    }
-
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        addressprovinceList selectedItem = list.get(position);
-        String selectedProvinceCode = selectedItem.getProvCode();
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+selectedProvinceCode);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
-
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("citymunDesc");
-                String province_regcode = item.getString("regDesc");
-                String province_citycode = item.getString("provCode");
-                String citycode = item.getString("citymunCode");
-                addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
-                ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                municipality.setAdapter(adapter);
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        municipality.setOnItemClickListener(this);
-        addresscityList selectedCity = addresscitylist.get(position);
-        String cityCode = selectedCity.getCitymunCode();
-//        String selectedcitycode = cityCodeList.get(position);
-        try{
-            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+cityCode);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
-
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String barangay_id = item.getString("id");
-                String barangay_code = item.getString("brgyCode");
-                String barangay_desc = item.getString("brgyDesc");
-                String barangay_regcode = item.getString("regCode");
-                String barangay_citycode = item.getString("provCode");
-                String citycode = item.getString("citymunCode");
-                listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
-                ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(RegisterActivity.this, android.R.layout.simple_spinner_item, listBarangay);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                barangay.setAdapter(adapter);
-
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
         barangay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -264,7 +549,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 SharedPreferences.Editor editor = prf.edit();
                 editor.putString("barangaycode", barangaycode);
                 editor.commit();
-
             }
         });
     }
@@ -353,10 +637,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
-
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
