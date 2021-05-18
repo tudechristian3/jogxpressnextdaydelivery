@@ -102,8 +102,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             province.setAdapter(adapter);
                         }
-
-
                     }
                 } catch (JSONException e){
                     e.printStackTrace();
@@ -137,9 +135,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String city_bohol = list.get(position).getProvCode();
         String city_cebu = list.get(position).getProvCode();
 
+
+
 //        Toast.makeText(this, prov_cagayan, Toast.LENGTH_SHORT).show();
 
         if(prov_cagayan.equals(prov_cagayan)) {
+
             //Toast.makeText(this, city_cagayan, Toast.LENGTH_SHORT).show();
             try{
                 URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan);
@@ -292,53 +293,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
 
 
-
-//
-//
-//
-//            String pro_code = prf.getString("checked_large", "");
-//            Toast.makeText(this, pro_code, Toast.LENGTH_SHORT).show();
-
-//        addressprovinceList selectedItem = list.get(3);
-//        String selectedProvinceCode = selectedItem.getProvCode();
-
-//        try{
-//            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+pro_code);
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            InputStream is=conn.getInputStream();
-//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//            String s=br.readLine();
-//
-//            is.close();
-//            conn.disconnect();
-//
-//            Log.d("json data", s);
-//                JSONObject json=new JSONObject(s);
-//                JSONArray array = json.getJSONArray("data");
-//                for(int i=0; i<array.length(); i++){
-//                    JSONObject item = array.getJSONObject(i);
-//                    String province_id = item.getString("id");
-//                    String province_code = item.getString("psgcCode");
-//                    String province_desc = item.getString("citymunDesc");
-//                    String province_regcode = item.getString("regDesc");
-//                    String province_citycode = item.getString("provCode");
-//                    String citycode = item.getString("citymunCode");
-//                    addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
-//                    ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(RegisterActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
-//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    municipality.setAdapter(adapter);
-//                }
-//
-//        }catch (MalformedURLException e){
-//            e.printStackTrace();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }catch (JSONException e){
-//            e.printStackTrace();
-//        }
         municipality.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 String mun_cagayan = addresscitylist.get(position).getCitymunCode();
                 String mun_negros = addresscitylist.get(position).getCitymunCode();
                 String mun_bohol = addresscitylist.get(position).getCitymunCode();
@@ -461,10 +419,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         e.printStackTrace();
                     }
                 }
-                else if(mun_cebu.equals(muni_code_cebu)){
+                else if(mun_cebu.equals(mun_cebu)){
                     Toast.makeText(RegisterActivity.this, muni_code_cebu, Toast.LENGTH_SHORT).show();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cebu);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
