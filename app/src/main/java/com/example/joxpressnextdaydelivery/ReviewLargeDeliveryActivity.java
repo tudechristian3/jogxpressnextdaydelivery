@@ -227,7 +227,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         try {
-            Package.put("type", "large");
+            Package.put("type", "Large");
             Package.put("weight", weight);
             Package.put("length", length);
             Package.put("width", width);
@@ -284,7 +284,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, object, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Created Successfully",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ReviewLargeDeliveryActivity.this, TransactionActivity.class);
                 startActivity(intent);
             }

@@ -759,7 +759,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtLargeWeight"
                     android:textColor="#000000"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:fontFamily="@font/amiko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -782,7 +782,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/black"
-                    android:text="Dimension" />
+                    android:text="Dimension"
+                    android:checked="true"/>
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -808,10 +809,11 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtLargeLength"
                     android:textColor="#000000"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:layout_width="match_parent"
                     android:fontFamily="@font/amiko"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:digits="1234567890.">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -839,7 +841,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtLargeWidth"
                     android:textColor="#000000"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:layout_width="match_parent"
                     android:fontFamily="@font/amiko"
                     android:layout_height="wrap_content"
@@ -872,7 +874,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txLargeHeight"
                     android:textColor="#000000"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amiko"
@@ -947,7 +949,7 @@
                     android:id="@+id/txtLargeValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:textColor="#000000"
                     android:fontFamily="@font/amiko"
                     android:digits="1234567890">
@@ -1039,7 +1041,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtSendersLargeContact"
                     android:textColor="#000000"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/amiko"
@@ -1058,6 +1060,7 @@
                 android:layout_marginEnd="32dp"
                 app:startIconTint="@color/black"
                 android:fontFamily="@font/amiko"
+                app:helperText="Required *"
                 app:startIconDrawable="@drawable/ic_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -1081,6 +1084,7 @@
                 android:hint="Select City"
                 app:startIconTint="@color/black"
                 android:fontFamily="@font/amiko"
+                app:helperText="Required *"
                 app:startIconDrawable="@drawable/ic_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -1102,6 +1106,7 @@
                 android:hint="Select Barangay"
                 app:startIconTint="@color/black"
                 android:fontFamily="@font/amiko"
+                app:helperText="Required *"
                 app:startIconDrawable="@drawable/ic_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -1213,7 +1218,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/LargetxtReceiverContact"
                     android:textColor="#000000"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:fontFamily="@font/amiko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1231,6 +1236,7 @@
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/amiko"
                 app:startIconTint="@color/black"
+                app:helperText="Required *"
                 app:startIconDrawable="@drawable/ic_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
@@ -1253,6 +1259,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="Select City"
                 app:startIconTint="@color/black"
+                app:helperText="Required *"
                 app:startIconDrawable="@drawable/ic_location"
                 android:fontFamily="@font/amiko"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -1275,6 +1282,7 @@
                 android:hint="Select Barangay"
                 app:startIconTint="@color/black"
                 android:fontFamily="@font/amiko"
+                app:helperText="Required *"
                 app:startIconDrawable="@drawable/ic_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 

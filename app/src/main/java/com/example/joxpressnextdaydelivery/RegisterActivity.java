@@ -52,6 +52,14 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     ArrayList<addresscityList> addresscitylist = new ArrayList<>();
     ArrayList<addressbarangayList> listBarangay = new ArrayList<>();
 
+    //cagayan city list
+    ArrayList<addresscityList> addresscityCagayanlist = new ArrayList<>();
+    //negros city list
+    ArrayList<addresscityList> addresscityNegroslist = new ArrayList<>();
+    //bohol city list
+    ArrayList<addresscityList> addresscityBohollist = new ArrayList<>();
+    //cebu cist list
+    ArrayList<addresscityList> addresscityCebulist = new ArrayList<>();
     //insert url
     private static final String url="https://www.jogx.ph/api/v1/user/register";
 
@@ -65,8 +73,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         municipality = findViewById(R.id.selectcity);
         barangay = findViewById(R.id.selectbarangay);
         barangaycode = findViewById(R.id.selectbarangaycode);
-
-
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -140,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 //        Toast.makeText(this, prov_cagayan, Toast.LENGTH_SHORT).show();
 
         if(prov_cagayan.equals(prov_cagayan)) {
-
+            addresscitylist.clear();
             //Toast.makeText(this, city_cagayan, Toast.LENGTH_SHORT).show();
             try{
                 URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan);
@@ -308,6 +314,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 String muni_code_cebu = addresscitylist.get(position).getCitymunCode();
 
                 if(mun_cagayan.equals(mun_cagayan)){
+                    listBarangay.clear();
                     //Toast.makeText(RegisterActivity.this, muni_code_cagayan, Toast.LENGTH_SHORT).show();
                     try{
                         URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
@@ -550,7 +557,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }else if (fname.equals("") || lname.equals("") || email.equals("") || phone.equals("") || password.equals("") || password_confirmation.equals("") || address_barangay.equals("") || bank_name.equals("") || bank_number.equals("")){
                 Toast.makeText(this, "Please fill up other fields", Toast.LENGTH_SHORT).show();
             }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(this, "Password didn't match", Toast.LENGTH_SHORT).show();
                 email_address.setError("Please enter a valid email address");
+            }else if(password.length() <= 5|| password_confirmation.length() <= 5){
+                Toast.makeText(this, "Password must 6 characters", Toast.LENGTH_SHORT).show();
             }
             else{
                 progressDialog.show();

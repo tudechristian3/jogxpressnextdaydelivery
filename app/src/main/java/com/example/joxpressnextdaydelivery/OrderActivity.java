@@ -548,6 +548,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         String city_cebu = list.get(position).getProvCode();
 
         if(prov_cagayan.equals(prov_cagayan)) {
+            addresscitylist.clear();
             try{
                 URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -711,6 +712,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
                 if(mun_cagayan.equals(mun_cagayan)){
+                    addressbarangayList.clear();
                     try{
                         URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -872,6 +874,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
         //Small Receiver City
         if(prov_cagayan_receiver.equals(prov_cagayan_receiver)) {
+            addresscitylist.clear();
             try{
                 URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -1029,11 +1032,12 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String muni_code_bohol = addresscitylist.get(position).getCitymunCode();
                 String muni_code_cebu = addresscitylist.get(position).getCitymunCode();
                 String selectedCityCode = addresscitylist.get(position).getCitymunCode();
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("city_code", selectedCityCode);
-                editor.commit();
+//                SharedPreferences.Editor editor = pref.edit();
+//                editor.putString("city_code", selectedCityCode);
+//                editor.commit();
 
                 if(mun_cagayan.equals(mun_cagayan)){
+                    receiverbarangayList.clear();
                     try{
                         URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -1196,6 +1200,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 String city_cebu_receiver_sender = list.get(position).getProvCode();
 
                 if(prov_cagayan_receiver_sender.equals(prov_cagayan_receiver_sender)){
+                    Largeaddresscitylist.clear();
                     try{
                         URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan_receiver_sender);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -1259,6 +1264,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 editor.commit();
 
                 if(mun_cagayan.equals(mun_cagayan)){
+                    LargeaddressbarangayList.clear();
                     try{
                         URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -1413,6 +1419,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         String city_cebu_large_receiver = list.get(position).getProvCode();
 
         if(prov_cagayan_large_receiver.equals(prov_bohol_large_receiver)){
+            Largeaddresscitylist.clear();
             try{
                 URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan_large_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -1569,6 +1576,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
                 if(mun_cagayan.equals(mun_cagayan)){
+                    LargeaddressbarangayList.clear();
                     try{
                         URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

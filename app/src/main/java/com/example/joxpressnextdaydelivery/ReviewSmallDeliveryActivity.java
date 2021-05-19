@@ -286,7 +286,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, object, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Created Successfully",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ReviewSmallDeliveryActivity.this, TransactionActivity.class);
                 startActivity(intent);
             }

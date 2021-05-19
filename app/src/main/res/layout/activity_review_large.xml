@@ -22,14 +22,7 @@
             android:src="@drawable/logo_jogxpress"
             android:layout_marginTop="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Review your delivery"
-            android:textColor="@color/black"
-            android:fontFamily="@font/amiko"
-            android:textSize="20dp" />
+
 
 
         <LinearLayout
@@ -74,7 +67,7 @@
                 android:text="Large"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Weight"
+                android:text="Weight (kg)"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
                 android:textSize="15dp" />
@@ -96,13 +89,13 @@
                 android:id="@+id/reviewlargweight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="170dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Weight"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Length"
+                android:text="Length (cm)"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
                 android:textSize="15dp" />
@@ -124,13 +117,13 @@
                 android:id="@+id/reviewlarglength"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="165dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Length"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Width"
+                android:text="Width (cm)"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
                 android:textSize="15dp" />
@@ -152,13 +145,13 @@
                 android:id="@+id/reviewlargwidth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
+                android:layout_marginLeft="170dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Width"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -171,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Height"
+                android:text="Height (cm)"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
                 android:textSize="15dp" />
@@ -180,13 +173,13 @@
                 android:id="@+id/reviewlargheight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="165dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Height"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -240,7 +233,7 @@
                 android:text="Total"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -268,7 +261,7 @@
                 android:text="x"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -305,13 +298,13 @@
                 android:id="@+id/reviewlargename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Name"
                 android:fontFamily="@font/amiko"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -332,13 +325,13 @@
                 android:id="@+id/reviewlargenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -365,7 +358,7 @@
                 android:text="Address"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -392,7 +385,7 @@
                 android:text="Address"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -427,12 +420,13 @@
                 android:id="@+id/reviewlargdeliveryname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:fontFamily="@font/amiko"
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -452,13 +446,13 @@
                 android:id="@+id/reviewlargdeliverynumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -484,7 +478,7 @@
                 android:fontFamily="@font/amiko"
                 android:text="Address"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -511,7 +505,7 @@
                 android:text="Address"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
-                android:textSize="15dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -597,6 +591,7 @@
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/amiko"
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
