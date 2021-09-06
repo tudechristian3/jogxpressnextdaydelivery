@@ -20,7 +20,7 @@ public class EarningsActivity extends AppCompatActivity {
     LinearLayout order,imgProfile,imgEarnings,imgTransaction,imgLogout;
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
-    private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/login";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongViewCast")
     @Override

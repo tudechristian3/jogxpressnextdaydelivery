@@ -17,7 +17,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo_jogxpress"
+        android:src="@drawable/logo_deliveree"
         android:layout_marginTop="20dp"
         />
 

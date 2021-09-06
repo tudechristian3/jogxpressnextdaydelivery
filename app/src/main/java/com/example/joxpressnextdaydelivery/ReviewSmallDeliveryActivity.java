@@ -158,7 +158,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
 
         String city_code = getIntent().getExtras().getString("small_city_code");
       //get fee
-        StringRequest request = new StringRequest(Request.Method.GET, "https://www.jogx.ph/ratesAPI/"+city_code, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, "https://www.deliveeri.xyz/ratesAPI/"+city_code+"/Small/3", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
@@ -282,7 +282,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
 
         final String mRequestBody = object.toString();
 
-        String URL = "https://www.jogx.ph/api/v1/transaction/createOrder";
+        String URL = "https://www.deliveeri.xyz/api/v1/transaction/createOrder";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, object, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

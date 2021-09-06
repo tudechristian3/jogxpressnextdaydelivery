@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginbutton;
     SharedPreferences pref;
 
-    private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/login";
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
     private static final String KEY_TOKEN = "token";
@@ -119,10 +119,10 @@ public class LoginActivity extends AppCompatActivity {
         Loginpassword = findViewById(R.id.txtpassword);
 
 
-        final String phone = Loginphone.getText().toString();
+        final String email = Loginphone.getText().toString();
         final String password = Loginpassword.getText().toString();
 
-        if(!phone.equals("") && !password.equals("")){
+        if(!email.equals("") && !password.equals("")){
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> param=new HashMap<String,String>();
-                    param.put("phone", phone);
+                    param.put("email", email);
                     param.put("password", password);
 
                     return param;

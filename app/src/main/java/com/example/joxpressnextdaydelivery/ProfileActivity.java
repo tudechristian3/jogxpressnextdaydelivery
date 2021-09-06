@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     List<addressbarangayList> listBarangay = new ArrayList<>();
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
-    private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/login";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongViewCast")
     @Override
@@ -111,7 +111,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getAllProvince");
+            URL url = new URL("https://www.deliveeri.xyz/api/v1/getAllProvince");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -156,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         String selectedProvinceCode = selectedItem.getProvCode();
         try{
 //            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+selectedProvinceCode);
+            URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+selectedProvinceCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -194,7 +194,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         String cityCode = selectedCity.getCitymunCode();
 //        String selectedcitycode = cityCodeList.get(position);
         try{
-            URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+cityCode);
+            URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+cityCode);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream is=conn.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

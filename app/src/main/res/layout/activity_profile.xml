@@ -16,7 +16,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo_jogxpress"
+        android:src="@drawable/logo_deliveree"
         android:layout_marginTop="20dp"/>
 
     <TextView
@@ -405,17 +405,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/register"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/amiko"
-        android:text="Register"
-        android:backgroundTint="@color/black">
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/register"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        android:text="Register"-->
+<!--        android:backgroundTint="@color/black">-->
 
-    </com.google.android.material.button.MaterialButton>
+<!--    </com.google.android.material.button.MaterialButton>-->
 
 
 

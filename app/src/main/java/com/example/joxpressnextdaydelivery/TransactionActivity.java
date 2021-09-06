@@ -78,7 +78,7 @@ public class TransactionActivity extends AppCompatActivity {
         String customer_token = pref.getString(KEY_TOKEN, "");
         track_code = findViewById(R.id.track_code);
 
-        String URL = "https://www.jogx.ph/api/v1/transaction/list";
+        String URL = "https://www.deliveeri.xyz/api/v1/transaction/list";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override

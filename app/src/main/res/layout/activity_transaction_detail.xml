@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="80dp"
-            android:src="@drawable/logo_jogxpress"
+            android:src="@drawable/logo_deliveree"
             android:layout_marginTop="20dp"/>
 
         <TextView
@@ -340,7 +340,7 @@
                 android:id="@+id/transaction_item_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
+                android:layout_marginLeft="157dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/amiko"

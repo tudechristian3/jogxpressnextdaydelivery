@@ -37,6 +37,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     ArrayList<addresscityList> addresscitylist = new ArrayList<>();
     ArrayList<addressbarangayList> listBarangay = new ArrayList<>();
 
+    ArrayAdapter<addressprovinceList> provinceadapter;
+
     //cagayan city list
     ArrayList<addresscityList> addresscityCagayanlist = new ArrayList<>();
     //negros city list
@@ -61,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     //cebu cist list
     ArrayList<addresscityList> addresscityCebulist = new ArrayList<>();
     //insert url
-    private static final String url="https://www.jogx.ph/api/v1/user/register";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
 
         //get Data of province
-        String URL = "https://www.jogx.ph/api/v1/getAllProvince";
+        //other province
+        //province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")
+
+        String URL = "https://www.deliveeri.xyz/api/v1/getAllProvince";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -102,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         String province_desc = item.getString("provDesc");
                         String province_regcode = item.getString("regCode");
                         String province_citycode = item.getString("provCode");
-                        if(province_desc.equals("CEBU") || province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")){
+                        if(province_desc.equals("CEBU")){
                             list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
                             ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(RegisterActivity.this, android.R.layout.simple_spinner_item, list);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -143,13 +149,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
 
 
-//        Toast.makeText(this, prov_cagayan, Toast.LENGTH_SHORT).show();
 
         if(prov_cagayan.equals(prov_cagayan)) {
             addresscitylist.clear();
             //Toast.makeText(this, city_cagayan, Toast.LENGTH_SHORT).show();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cagayan);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -185,9 +190,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
 
         else if(prov_negros.equals(prov_negros)){
-            //Toast.makeText(this, city_negros, Toast.LENGTH_SHORT).show();
+            addresscitylist.clear();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_negros);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_negros);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -225,7 +230,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         else if(prov_bohol.equals(prov_bohol)){
             //Toast.makeText(this, city_negros, Toast.LENGTH_SHORT).show();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_bohol);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_bohol);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -263,7 +268,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         else if(prov_cebu.equals(prov_cebu)){
             //Toast.makeText(this, city_negros, Toast.LENGTH_SHORT).show();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cebu);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cebu);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -317,7 +322,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     listBarangay.clear();
                     //Toast.makeText(RegisterActivity.this, muni_code_cagayan, Toast.LENGTH_SHORT).show();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -355,7 +360,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 else if(mun_negros.equals(mun_negros)){
                     Toast.makeText(RegisterActivity.this, muni_code_negros, Toast.LENGTH_SHORT).show();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_negros);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_negros);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -392,7 +397,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 else if(mun_bohol.equals(mun_bohol)){
                     Toast.makeText(RegisterActivity.this, muni_code_bohol, Toast.LENGTH_SHORT).show();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_bohol);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -429,7 +434,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 else if(mun_cebu.equals(mun_cebu)){
                     Toast.makeText(RegisterActivity.this, muni_code_cebu, Toast.LENGTH_SHORT).show();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cebu);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cebu);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));

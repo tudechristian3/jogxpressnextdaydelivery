@@ -60,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Small (Maximum of 3kg)"
+                        android:text="Small Pouch(Max of 3kg)"
                         android:textColor="#fefefe"
                         android:fontFamily="@font/amiko"
                         android:textSize="10sp"
@@ -95,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Large (3kg+)"
+                        android:text="Large Pouch (Max 10Kg)"
                         android:textColor="#fefefe"
                         android:fontFamily="@font/amiko"
                         android:textSize="10sp"
@@ -346,9 +346,10 @@
                     android:id="@+id/cod_payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/violet"
                     android:fontFamily="@font/amiko"
                     android:buttonTint="@color/black"
-                    android:text="Receiver's payment (Cash on Delivery)" />
+                    android:text="Cash-Paid by Receiver (Cash on Delivery)" />
             </RadioGroup>
 
             <TextView
@@ -812,6 +813,7 @@
                     android:inputType="phone"
                     android:layout_width="match_parent"
                     android:fontFamily="@font/amiko"
+                    android:enabled="false"
                     android:layout_height="wrap_content"
                     android:digits="1234567890.">
 
@@ -844,6 +846,7 @@
                     android:inputType="phone"
                     android:layout_width="match_parent"
                     android:fontFamily="@font/amiko"
+                    android:enabled="false"
                     android:layout_height="wrap_content"
                     android:digits="1234567890.">
 
@@ -877,6 +880,7 @@
                     android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:fontFamily="@font/amiko"
                     android:digits="1234567890.">
 
@@ -970,7 +974,8 @@
                     android:id="@+id/Largecod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Receiver's payment (Cash on Delivery)"
+                    android:textColor="@color/violet"
+                    android:text="Cash-Paid by Receiver (Cash on Delivery)"
                     android:fontFamily="@font/amiko"
                     android:buttonTint="@color/black"/>
             </RadioGroup>

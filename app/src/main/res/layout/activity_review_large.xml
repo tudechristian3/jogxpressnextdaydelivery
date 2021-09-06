@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="80dp"
-            android:src="@drawable/logo_jogxpress"
+            android:src="@drawable/logo_deliveree"
             android:layout_marginTop="20dp"/>
 
 
@@ -246,8 +246,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Receiver's payment?"
-                android:textColor="@color/black"
+                android:text="Cash-Paid by Receiver \n (Cash on Delivery)"
+                android:textColor="@color/violet"
                 android:fontFamily="@font/amiko"
                 android:textSize="15dp" />
 
@@ -570,7 +570,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Receiver's Fee"
+                android:text="Item Value"
                 android:textColor="@color/black"
                 android:fontFamily="@font/amiko"
                 android:textSize="15dp" />

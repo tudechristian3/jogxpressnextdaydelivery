@@ -46,7 +46,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
     private static final String KEY_TOKEN = "token";
-    private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/login";
 //    ArrayList<TransactionList> list = new ArrayList<>();
 //    TransactionAdapter adapter;
     private RequestQueue requestQueue;
@@ -98,7 +98,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fefefe")));
 
-        String URL = "https://www.jogx.ph/api/v1/transaction/"+tracking_code;
+        String URL = "https://www.deliveeri.xyz/api/v1/transaction/"+tracking_code;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override

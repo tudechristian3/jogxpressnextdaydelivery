@@ -131,7 +131,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
     private static final String KEY_DATA = "data";
     private static final String KEY_TOKEN = "token";
     private static final String KEY_ITEM_NAME = "item_name";
-    private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/login";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongViewCast")
     @Override
@@ -167,6 +167,8 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         smallLength.setText("18");
         smallWidth.setText("12");
         smallHeight.setText("5");
+
+
 
         itemname = findViewById(R.id.txtItemName);
         itemamount = findViewById(R.id.txtValue);
@@ -209,6 +211,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         largeLength = findViewById(R.id.txtLargeLength);
         largeWidth = findViewById(R.id.txtLargeWidth);
         largeHeight = findViewById(R.id.txLargeHeight);
+
+        largeLength.setText("4");
+        largeWidth.setText("16");
+        largeHeight.setText("20");
 
         //EditText Large Item Detial
         largeItemName = findViewById(R.id.txtLargeItemName);
@@ -363,7 +369,10 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
 
                 if(largeweight.equals("3")){
-                    Toast.makeText(OrderActivity.this, "Weight must be greater than 3", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrderActivity.this, "Weight must be greater than 3 Kilogram", Toast.LENGTH_SHORT).show();
+                }
+                else if(largeweight.equals("11")){
+                    Toast.makeText(OrderActivity.this, "Weight must be maxmium 10 Kilogram", Toast.LENGTH_SHORT).show();
                 }
                 else if(largeweight.equals("") || largelength.equals("") || largewidth.equals("") || largeheight.equals("")){
                     Toast.makeText(OrderActivity.this, "All Fields are required", Toast.LENGTH_SHORT).show();
@@ -419,7 +428,9 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
         //Large Receiver
-        String URL_receiver_large = "https://www.jogx.ph/api/v1/getAllProvince";
+        //other province
+        //province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")
+        String URL_receiver_large = "https://www.deliveeri.xyz/api/v1/getAllProvince";
         StringRequest stringRequest_receiver_large = new StringRequest(Request.Method.GET, URL_receiver_large, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -433,7 +444,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                             String province_desc = item.getString("provDesc");
                             String province_regcode = item.getString("regCode");
                             String province_citycode = item.getString("provCode");
-                            if(province_desc.equals("CEBU") || province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")) {
+                            if(province_desc.equals("CEBU")) {
                                 Largelist.add(new LargeaddressprovinceList(province_id, province_code, province_desc, province_regcode, province_citycode));
                                 ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, Largelist);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -456,7 +467,9 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
         //Small Sender
-        String URL_sender_small = "https://www.jogx.ph/api/v1/getAllProvince";
+        //other province
+        //province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")
+        String URL_sender_small = "https://www.deliveeri.xyz/api/v1/getAllProvince";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_sender_small, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -470,7 +483,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                             String province_desc = item.getString("provDesc");
                             String province_regcode = item.getString("regCode");
                             String province_citycode = item.getString("provCode");
-                            if(province_desc.equals("CEBU") || province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")){
+                            if(province_desc.equals("CEBU")){
                                 list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
                                 ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, list);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -493,7 +506,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
         //Small Receiver
-        String URL_receiver_small = "https://www.jogx.ph/api/v1/getAllProvince";
+        String URL_receiver_small = "https://www.deliveeri.xyz/api/v1/getAllProvince";
         StringRequest stringRequest_receiver_small = new StringRequest(Request.Method.GET, URL_receiver_small, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -507,7 +520,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                             String province_desc = item.getString("provDesc");
                             String province_regcode = item.getString("regCode");
                             String province_citycode = item.getString("provCode");
-                            if(province_desc.equals("CEBU") || province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")) {
+                            if(province_desc.equals("CEBU")) {
                                 listreceiver.add(new addressprovinceList(province_id, province_code, province_desc, province_regcode, province_citycode));
                                 ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, listreceiver);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -550,7 +563,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         if(prov_cagayan.equals(prov_cagayan)) {
             addresscitylist.clear();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cagayan);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -586,7 +599,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(prov_negros.equals(prov_negros)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_negros);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_negros);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -622,7 +635,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(prov_bohol.equals(prov_bohol)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_bohol);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_bohol);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -658,7 +671,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(prov_cebu.equals(prov_cebu)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cebu);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cebu);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -714,7 +727,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(mun_cagayan.equals(mun_cagayan)){
                     addressbarangayList.clear();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -750,7 +763,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
                 else if(mun_negros.equals(mun_negros)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_negros);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_negros);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -786,7 +799,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
                 else if(mun_bohol.equals(mun_bohol)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_bohol);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -822,7 +835,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
                 else if(mun_cebu.equals(mun_cebu)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cebu);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cebu);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -876,7 +889,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         if(prov_cagayan_receiver.equals(prov_cagayan_receiver)) {
             addresscitylist.clear();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cagayan_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -912,7 +925,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(prov_negros_receiver.equals(prov_negros_receiver)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_negros_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_negros_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -948,7 +961,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(prov_boho_receiver.equals(prov_boho_receiver)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_bohol_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_bohol_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -984,7 +997,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(prov_cebu_receiver.equals(prov_cebu_receiver)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cebu_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cebu_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1039,7 +1052,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(mun_cagayan.equals(mun_cagayan)){
                     receiverbarangayList.clear();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1076,7 +1089,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
                 else if(mun_negros.equals(mun_negros)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_negros);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_negros);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1113,7 +1126,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
                 else if(mun_bohol.equals(mun_bohol)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_bohol);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1150,7 +1163,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 }
                 else if(mun_cebu.equals(mun_cebu)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cebu);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cebu);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1202,7 +1215,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(prov_cagayan_receiver_sender.equals(prov_cagayan_receiver_sender)){
                     Largeaddresscitylist.clear();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan_receiver_sender);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cagayan_receiver_sender);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1266,7 +1279,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(mun_cagayan.equals(mun_cagayan)){
                     LargeaddressbarangayList.clear();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1301,7 +1314,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }else if(mun_negros.equals(mun_negros)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_negros);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_negros);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1336,7 +1349,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }else if(mun_bohol.equals(mun_bohol)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_bohol);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1371,7 +1384,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }else if(mun_cebu.equals(mun_cebu)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cebu);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cebu);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1421,7 +1434,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
         if(prov_cagayan_large_receiver.equals(prov_bohol_large_receiver)){
             Largeaddresscitylist.clear();
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cagayan_large_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cagayan_large_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1456,7 +1469,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         }else if(prov_negros_large_receiver.equals(prov_negros_large_receiver)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_negros_large_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_negros_large_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1491,7 +1504,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         }else if(prov_bohol_large_receiver.equals(prov_bohol_large_receiver)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_bohol_large_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_bohol_large_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1526,7 +1539,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         }else if(prov_cebu_large_receiver.equals(prov_cebu_large_receiver)){
             try{
-                URL url = new URL("https://www.jogx.ph/api/v1/getCitiesById/"+city_cebu_large_receiver);
+                URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+city_cebu_large_receiver);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream is=conn.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1578,7 +1591,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(mun_cagayan.equals(mun_cagayan)){
                     LargeaddressbarangayList.clear();
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cagayan);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cagayan);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1613,7 +1626,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }else if(mun_negros.equals(mun_negros)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_negros);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_negros);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1648,7 +1661,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }else if(mun_bohol.equals(mun_bohol)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_bohol);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_bohol);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1683,7 +1696,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }else if(mun_cebu.equals(mun_cebu)){
                     try{
-                        URL url = new URL("https://www.jogx.ph/api/v1/getBarangayById/"+muni_code_cebu);
+                        URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+muni_code_cebu);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         InputStream is=conn.getInputStream();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -1964,7 +1977,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
     public void large_sender_province(){
         //Large Sender Province
-        String URL_sender_large = "https://www.jogx.ph/api/v1/getAllProvince";
+        String URL_sender_large = "https://www.deliveeri.xyz/api/v1/getAllProvince";
         StringRequest stringRequest_sender_large = new StringRequest(Request.Method.GET, URL_sender_large, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1978,7 +1991,7 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
                         String province_desc = item.getString("provDesc");
                         String province_regcode = item.getString("regCode");
                         String province_citycode = item.getString("provCode");
-                        if(province_desc.equals("CEBU") || province_desc.equals("CAGAYAN") || province_desc.equals("NEGROS OCCIDENTAL") || province_desc.equals("BOHOL")) {
+                        if(province_desc.equals("CEBU")) {
                             LargelistReceiver.add(new LargeaddressprovinceList(province_id, province_code, province_desc, province_regcode, province_citycode));
                             ArrayAdapter<LargeaddressprovinceList> adapter = new ArrayAdapter<LargeaddressprovinceList>(OrderActivity.this, android.R.layout.simple_spinner_item, LargelistReceiver);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -58,7 +58,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
     private static final String KEY_PHONE = "phone";
     private static final String KEY_DATA = "data";
     private static final String KEY_TOKEN = "token";
-    private static final String url="https://www.jogx.ph/api/v1/user/login";
+    private static final String url="https://www.deliveeri.xyz/api/v1/user/login";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("WrongViewCast")
     @Override
@@ -151,7 +151,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
         large_total_fee = findViewById(R.id.reviewlargtotalfee);
 
         //get fee
-        StringRequest request = new StringRequest(Request.Method.GET, "https://www.jogx.ph/ratesAPI/"+CityCode, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, "https://www.deliveeri.xyz/ratesAPI/"+CityCode+"/Large/4", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
@@ -280,7 +280,7 @@ public class ReviewLargeDeliveryActivity extends AppCompatActivity {
 
         final String mRequestBody = object.toString();
 
-        String URL = "https://www.jogx.ph/api/v1/transaction/createOrder";
+        String URL = "https://www.deliveeri.xyz/api/v1/transaction/createOrder";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, object, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

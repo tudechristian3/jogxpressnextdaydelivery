@@ -19,17 +19,17 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:src="@drawable/logo_jogxpress"
+        android:src="@drawable/deliveeri_logo"
         android:layout_marginTop="20dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:fontFamily="@font/amiko"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Login"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="30dp" />-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtPhoneLayout"
@@ -40,9 +40,9 @@
         android:layout_marginTop="32dp"
         android:textColorHint="@color/black"
         android:layout_marginEnd="32dp"
-        android:hint="Phone"
+        android:hint="Email Address"
         app:startIconTint="@color/black"
-        app:startIconDrawable="@drawable/ic_phone"
+        app:startIconDrawable="@drawable/ic_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:fontFamily="@font/amiko"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amiko"
-                android:inputType="phone">
+                android:inputType="text">
 
             </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +100,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/amiko"
         android:text="Login"
-        android:backgroundTint="@color/black">
+        android:backgroundTint="@color/violet">
 
     </com.google.android.material.button.MaterialButton>
 
