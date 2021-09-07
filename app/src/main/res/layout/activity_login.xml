@@ -19,7 +19,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:src="@drawable/deliveeri_logo"
+        android:src="@drawable/deliveeri_nextday"
         android:layout_marginTop="20dp"
         />
 
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amiko"
-                android:inputType="text">
+                android:inputType="textEmailAddress">
 
             </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>

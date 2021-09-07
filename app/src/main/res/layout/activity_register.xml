@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical">
@@ -17,18 +16,18 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo_deliveree"
+        android:src="@drawable/deliveeri_nextday"
         android:layout_marginTop="20dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Register"
-        android:textColor="@color/black"
-        android:fontFamily="@font/amiko"
-        android:textSize="30dp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        android:text="Register"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="30dp" />-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtFnameLayout"
@@ -337,7 +336,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/black"
-        android:hint="Bank Name"
+        android:hint="Bank Name: (G-Cash / Paymaya / BPI)"
         app:startIconDrawable="@drawable/ic_card"
         app:startIconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -369,7 +368,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/black"
-        android:hint="Bank Card"
+        android:hint="Bank Number: (G-CASH # / Paymaya # / BPI)"
         app:startIconDrawable="@drawable/ic_card"
         app:startIconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

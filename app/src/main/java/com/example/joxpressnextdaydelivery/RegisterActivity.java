@@ -3,6 +3,8 @@ package com.example.joxpressnextdaydelivery;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -78,8 +80,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         barangaycode = findViewById(R.id.selectbarangaycode);
 
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
+
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fefefe")));
 
         signup = findViewById(R.id.register);
         signup.setOnClickListener(new View.OnClickListener() {

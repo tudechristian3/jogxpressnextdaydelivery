@@ -45,7 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProfileActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ProfileActivity extends AppCompatActivity {
 
     EditText customer_fname,customer_lname,customer_email,customer_phone,customer_bank_name,customer_bank_number;
     TextView Logout,customername;
@@ -80,9 +80,9 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         customer_bank_name = findViewById(R.id.txtbankname);
         customer_bank_number = findViewById(R.id.txtprofilebankcard);
 
-        province = findViewById(R.id.selectprofileaddress);
-        municipality = findViewById(R.id.selectprofiletcity);
-        barangay = findViewById(R.id.selectprofilebarangay);
+//        province = findViewById(R.id.selectprofileaddress);
+//        municipality = findViewById(R.id.selectprofiletcity);
+//        barangay = findViewById(R.id.selectprofilebarangay);
 
         customer_email.setText(customer_email_data);
         customer_phone.setText(customer_phone_data);
@@ -109,123 +109,123 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         }
 
 
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.deliveeri.xyz/api/v1/getAllProvince");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
-
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("provDesc");
-                String province_regcode = item.getString("regCode");
-                String province_citycode = item.getString("provCode");
-                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
-                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(ProfileActivity.this, android.R.layout.simple_spinner_item, list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                province.setAdapter(adapter);
-
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        province.setOnItemClickListener(this);
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.deliveeri.xyz/api/v1/getAllProvince");
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String province_id = item.getString("id");
+//                String province_code = item.getString("psgcCode");
+//                String province_desc = item.getString("provDesc");
+//                String province_regcode = item.getString("regCode");
+//                String province_citycode = item.getString("provCode");
+//                list.add(new addressprovinceList(province_id,province_code,province_desc,province_regcode,province_citycode));
+//                ArrayAdapter<addressprovinceList> adapter = new ArrayAdapter<addressprovinceList>(ProfileActivity.this, android.R.layout.simple_spinner_item, list);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                province.setAdapter(adapter);
+//
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+//
+//        province.setOnItemClickListener(this);
 
 
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        addressprovinceList selectedItem = list.get(position);
-        String selectedProvinceCode = selectedItem.getProvCode();
-        try{
-//            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
-            URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+selectedProvinceCode);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
-
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String province_id = item.getString("id");
-                String province_code = item.getString("psgcCode");
-                String province_desc = item.getString("citymunDesc");
-                String province_regcode = item.getString("regDesc");
-                String province_citycode = item.getString("provCode");
-                String citycode = item.getString("citymunCode");
-                addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
-                ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(ProfileActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                municipality.setAdapter(adapter);
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        municipality.setOnItemClickListener(this);
-        addresscityList selectedCity = addresscitylist.get(position);
-        String cityCode = selectedCity.getCitymunCode();
-//        String selectedcitycode = cityCodeList.get(position);
-        try{
-            URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+cityCode);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            InputStream is=conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s=br.readLine();
-
-            is.close();
-            conn.disconnect();
-
-            Log.d("json data", s);
-            JSONObject json=new JSONObject(s);
-            JSONArray array = json.getJSONArray("data");
-            for(int i=0; i<array.length(); i++){
-                JSONObject item = array.getJSONObject(i);
-                String barangay_id = item.getString("id");
-                String barangay_code = item.getString("brgyCode");
-                String barangay_desc = item.getString("brgyDesc");
-                String barangay_regcode = item.getString("regCode");
-                String barangay_citycode = item.getString("provCode");
-                String citycode = item.getString("citymunCode");
-                listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
-                ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(ProfileActivity.this, android.R.layout.simple_spinner_item, listBarangay);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                barangay.setAdapter(adapter);
-
-            }
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        addressprovinceList selectedItem = list.get(position);
+//        String selectedProvinceCode = selectedItem.getProvCode();
+//        try{
+////            URL url = new URL("http://192.168.43.118/washmycar/index.php/androidcontroller/get_carwash_station");
+//            URL url = new URL("https://www.deliveeri.xyz/api/v1/getCitiesById/"+selectedProvinceCode);
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String province_id = item.getString("id");
+//                String province_code = item.getString("psgcCode");
+//                String province_desc = item.getString("citymunDesc");
+//                String province_regcode = item.getString("regDesc");
+//                String province_citycode = item.getString("provCode");
+//                String citycode = item.getString("citymunCode");
+//                addresscitylist.add(new addresscityList(province_id,province_code,province_desc,province_regcode,province_citycode,citycode));
+//                ArrayAdapter<addresscityList> adapter = new ArrayAdapter<addresscityList>(ProfileActivity.this, android.R.layout.simple_spinner_item, addresscitylist);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                municipality.setAdapter(adapter);
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+//
+//        municipality.setOnItemClickListener(this);
+//        addresscityList selectedCity = addresscitylist.get(position);
+//        String cityCode = selectedCity.getCitymunCode();
+////        String selectedcitycode = cityCodeList.get(position);
+//        try{
+//            URL url = new URL("https://www.deliveeri.xyz/api/v1/getBarangayById/"+cityCode);
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            InputStream is=conn.getInputStream();
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//            String s=br.readLine();
+//
+//            is.close();
+//            conn.disconnect();
+//
+//            Log.d("json data", s);
+//            JSONObject json=new JSONObject(s);
+//            JSONArray array = json.getJSONArray("data");
+//            for(int i=0; i<array.length(); i++){
+//                JSONObject item = array.getJSONObject(i);
+//                String barangay_id = item.getString("id");
+//                String barangay_code = item.getString("brgyCode");
+//                String barangay_desc = item.getString("brgyDesc");
+//                String barangay_regcode = item.getString("regCode");
+//                String barangay_citycode = item.getString("provCode");
+//                String citycode = item.getString("citymunCode");
+//                listBarangay.add(new addressbarangayList(barangay_id,barangay_code,barangay_desc,barangay_regcode,barangay_citycode,citycode));
+//                ArrayAdapter<addressbarangayList> adapter = new ArrayAdapter<addressbarangayList>(ProfileActivity.this, android.R.layout.simple_spinner_item, listBarangay);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                barangay.setAdapter(adapter);
+//
+//            }
+//        }catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+    //}
 }

@@ -16,17 +16,17 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo_deliveree"
+        android:src="@drawable/deliveeri_nextday"
         android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Profile"
-        android:textColor="@color/black"
-        android:fontFamily="@font/amiko"
-        android:textSize="30dp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:text="Profile"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        android:textSize="30dp" />-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtFnameLayout"
@@ -222,90 +222,90 @@
     android:layout_height="2dp"
     android:background="#c0c0c0"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Select Address"
-        android:fontFamily="@font/amiko"
-        app:startIconTint="@color/black"
-        app:startIconDrawable="@drawable/ic_location"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Select Address"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        app:startIconTint="@color/black"-->
+<!--        app:startIconDrawable="@drawable/ic_location"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
 
-        <AutoCompleteTextView
-            android:id="@+id/selectprofileaddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amiko"
-            android:enabled="false"
-            android:textColor="#000000" />
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Select City/Municipality"
-        app:startIconTint="@color/black"
-        android:fontFamily="@font/amiko"
-        app:startIconDrawable="@drawable/ic_location"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-        <AutoCompleteTextView
-            android:id="@+id/selectprofiletcity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:fontFamily="@font/amiko"
-            android:textColor="#000000"/>
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/selectprofileaddress"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/amiko"-->
+<!--            android:enabled="false"-->
+<!--            android:textColor="#000000" />-->
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Select Barangay"
-        app:startIconTint="@color/black"
-        android:fontFamily="@font/amiko"
-        app:startIconDrawable="@drawable/ic_location"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Select City/Municipality"-->
+<!--        app:startIconTint="@color/black"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        app:startIconDrawable="@drawable/ic_location"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
 
-        <AutoCompleteTextView
-            android:id="@+id/selectprofilebarangay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amiko"
-            android:enabled="false"
-            android:textColor="#000000"/>
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="300dp"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:hint="Select Barangay Code"
-        app:startIconTint="@color/black"
-        android:fontFamily="@font/amiko"
-        app:startIconDrawable="@drawable/ic_location"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-        <AutoCompleteTextView
-            android:id="@+id/selectprofilebarangaycode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:fontFamily="@font/amiko"
-            android:textColor="#000000"/>
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/selectprofiletcity"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:enabled="false"-->
+<!--            android:fontFamily="@font/amiko"-->
+<!--            android:textColor="#000000"/>-->
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Select Barangay"-->
+<!--        app:startIconTint="@color/black"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        app:startIconDrawable="@drawable/ic_location"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
+
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/selectprofilebarangay"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/amiko"-->
+<!--            android:enabled="false"-->
+<!--            android:textColor="#000000"/>-->
+
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Select Barangay Code"-->
+<!--        app:startIconTint="@color/black"-->
+<!--        android:fontFamily="@font/amiko"-->
+<!--        app:startIconDrawable="@drawable/ic_location"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
+
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/selectprofilebarangaycode"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:enabled="false"-->
+<!--            android:fontFamily="@font/amiko"-->
+<!--            android:textColor="#000000"/>-->
+
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
     <View

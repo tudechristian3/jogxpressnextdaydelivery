@@ -21,18 +21,18 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:src="@drawable/deliveeri_logo" />
+                android:src="@drawable/deliveeri_nextday" />
 
-        <TextView
-            android:id="@+id/appname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/amiko"
-            android:text="Next Day Delivery"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            tools:ignore="MissingClass" />
+<!--        <TextView-->
+<!--            android:id="@+id/appname"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:fontFamily="@font/amiko"-->
+<!--            android:text="Next Day Delivery"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="30dp"-->
+<!--            tools:ignore="MissingClass" />-->
 
         <TextView
             android:id="@+id/tagline"

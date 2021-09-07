@@ -206,7 +206,7 @@ public class ReviewSmallDeliveryActivity extends AppCompatActivity {
     public void deliver() {
         String customer_token = pref.getString(KEY_TOKEN, "");
         String item_name = getIntent().getExtras().getString("small_item_name");
-        String fee = reviewsmall_fee_total.getText().toString();
+        String fee = reviewsmall_fee.getText().toString();
         String item_total = senderamount.getText().toString();
 
         String pickup_name = reviewsmall_item_name.getText().toString();
