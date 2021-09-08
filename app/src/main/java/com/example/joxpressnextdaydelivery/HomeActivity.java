@@ -1,12 +1,17 @@
 package com.example.joxpressnextdaydelivery;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.my_profile);
         imgTransaction = findViewById(R.id.my_transacitons);
         imgLogout = findViewById(R.id.my_logout);
+
+        checkInternet();
 
         order.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +134,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void clickDone() {
         new AlertDialog.Builder(this, R.style.DialogStyle)
-                .setIcon(R.drawable.logo)
+                .setIcon(R.drawable.deliveeri_nextday)
                 .setTitle(getString(R.string.app_name))
                 .setMessage("Are you sure you want to exit the applicaiton?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -151,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void clickLogout(){
         new AlertDialog.Builder(this, R.style.DialogStyle)
-                .setIcon(R.drawable.logo)
+                .setIcon(R.drawable.deliveeri_nextday)
                 .setTitle(getString(R.string.app_name))
                 .setMessage("Are you sure you want to Logout?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -174,5 +181,25 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    public void checkInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.activity_internet_connection);
+            dialog.setCancelable(false);
+            dialog.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
+            Button btnOk = dialog.findViewById(R.id.close_wifi);
+            btnOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+            dialog.show();
+        }
     }
 }
