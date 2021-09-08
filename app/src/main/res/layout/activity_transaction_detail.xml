@@ -50,16 +50,28 @@
                 android:fontFamily="@font/amiko"/>
 
             <TextView
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:text="₱"
+                android:layout_marginLeft="120dp"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"/>
+
+            <TextView
                 android:id="@+id/transaction_tracking_fee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="137dp"
+                android:layout_marginLeft="10dp"
                 android:fontFamily="@font/amiko"
                 android:text="Large"
                 android:textColor="@color/black"
                 android:textSize="12dp" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +86,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Status"
                 android:fontFamily="@font/amiko"
-                android:textColor="@color/black"
+                android:textColor="@color/violet"
                 android:textSize="15dp" />
 
             <TextView
@@ -329,18 +341,29 @@
             android:weightSum="2">
 
             <TextView
-                android:layout_width="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:text="Item(s) Worth"
+            android:textSize="15dp"
+            android:fontFamily="@font/amiko"/>
+
+            <TextView
+                android:layout_width="10dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/black"
                 android:text="₱"
-                android:textSize="15dp" />
+                android:layout_marginLeft="87dp"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"/>
 
             <TextView
                 android:id="@+id/transaction_item_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="157dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/amiko"
